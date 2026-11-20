@@ -1,0 +1,2318 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#060d1f" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="HemaOS Portfolio" />
+  <title>Hemavathy R — Software Engineer | Portfolio</title>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['"Segoe UI Variable"', '"Segoe UI"', 'Inter', '-apple-system', 'sans-serif'],
+            mono: ['"Cascadia Code"', '"JetBrains Mono"', 'monospace'],
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      user-select: none;
+    }
+
+    .selectable-text {
+      user-select: text;
+    }
+
+    body {
+      font-family: 'Segoe UI Variable', 'Segoe UI', 'Inter', -apple-system, sans-serif;
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      transition: background 0.4s ease, color 0.25s ease;
+    }
+
+    /* Animated Image Wallpaper */
+    :root {
+      /* Replace this URL with any animated GIF, WebP, or high-res wallpaper image */
+      --wallpaper-url: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80');
+    }
+
+    @keyframes wallpaper-motion {
+      0%, 100% { transform: scale(1.04) translate3d(0, 0, 0); }
+      50% { transform: scale(1.12) translate3d(-1.5%, -1%, 0); }
+    }
+
+    #desktop-wallpaper-img {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      pointer-events: none;
+      z-index: 0;
+      animation: wallpaper-motion 22s ease-in-out infinite;
+    }
+
+    body.theme-dark-bloom {
+      background-color: #060d1f;
+      color: #f8fafc;
+    }
+
+    body.theme-light-bloom {
+      background-color: #dbeafe;
+      color: #0f172a;
+    }
+
+    body.theme-sql-blue {
+      background-color: #04101e;
+      color: #f8fafc;
+    }
+
+    /* Taskbar, flyouts & window chrome */
+    .win11-taskbar {
+      height: 48px;
+      background: rgba(16, 23, 38, 0.78);
+      backdrop-filter: blur(24px) saturate(180%);
+      -webkit-backdrop-filter: blur(24px) saturate(180%);
+      border-top: 1px solid rgba(255, 255, 255, 0.11);
+    }
+
+    body.theme-light-bloom .win11-taskbar {
+      background: rgba(243, 246, 252, 0.82);
+      border-top: 1px solid rgba(15, 23, 42, 0.1);
+      color: #0f172a;
+    }
+
+    .win11-flyout {
+      background: rgba(20, 27, 45, 0.88);
+      backdrop-filter: blur(28px) saturate(180%);
+      -webkit-backdrop-filter: blur(28px) saturate(180%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 24px 64px rgba(0, 0, 0, 0.65);
+    }
+
+    .win11-window {
+      border-radius: 10px;
+      background: rgba(15, 23, 42, 0.92);
+      backdrop-filter: blur(26px) saturate(175%);
+      -webkit-backdrop-filter: blur(26px) saturate(175%);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 22px 60px -12px rgba(0, 0, 0, 0.78), 0 0 0 0.5px rgba(255, 255, 255, 0.06);
+      transition: transform 0.18s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.16s ease, box-shadow 0.18s ease;
+    }
+
+    .win11-window.active-window {
+      border-color: rgba(96, 165, 250, 0.45);
+      box-shadow: 0 30px 75px -10px rgba(0, 0, 0, 0.88), 0 0 0 1px rgba(59, 130, 246, 0.25);
+    }
+
+    .win-caption-btn {
+      width: 44px;
+      height: 36px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background-color 0.12s ease, color 0.12s ease;
+    }
+
+    .win-caption-btn:hover {
+      background-color: rgba(255, 255, 255, 0.09);
+    }
+
+    .win-caption-close:hover {
+      background-color: #c42b1c !important;
+      color: #ffffff !important;
+    }
+
+    .desktop-icon {
+      border-radius: 6px;
+      border: 1px solid transparent;
+      transition: background-color 0.12s ease, border-color 0.12s ease;
+    }
+
+    .desktop-icon:hover {
+      background-color: rgba(255, 255, 255, 0.09);
+      border-color: rgba(255, 255, 255, 0.16);
+    }
+
+    .desktop-icon.selected {
+      background-color: rgba(59, 130, 246, 0.26);
+      border-color: rgba(96, 165, 250, 0.65);
+    }
+
+    body.theme-light-bloom .desktop-icon .icon-label {
+      color: #0f172a;
+      text-shadow: 0 1px 2px rgba(255, 255, 255, 0.9);
+    }
+
+    .taskbar-app-btn {
+      position: relative;
+      border-radius: 6px;
+      transition: background-color 0.14s ease, transform 0.12s ease;
+    }
+
+    .taskbar-app-btn:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+
+    body.theme-light-bloom .taskbar-app-btn:hover {
+      background-color: rgba(15, 23, 42, 0.08);
+    }
+
+    .taskbar-app-btn:active {
+      transform: scale(0.93);
+    }
+
+    .taskbar-indicator {
+      position: absolute;
+      bottom: 2px;
+      left: 50%;
+      transform: translateX(-50%);
+      height: 3px;
+      border-radius: 999px;
+      transition: width 0.2s ease, background-color 0.2s ease;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+      height: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: rgba(148, 163, 184, 0.35);
+      border-radius: 9999px;
+    }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(96, 165, 250, 0.7);
+    }
+
+    @media print {
+      body * { visibility: hidden; }
+      #printable-resume, #printable-resume * { visibility: visible; }
+      #printable-resume {
+        position: fixed;
+        inset: 0;
+        width: 100%;
+        background: #ffffff !important;
+        color: #000000 !important;
+        padding: 24px;
+        z-index: 99999;
+      }
+    }
+  </style>
+</head>
+<body class="theme-dark-bloom flex flex-col justify-between relative select-none" oncontextmenu="showContextMenu(event)">
+
+  <!-- Full-Screen Animated Background Image (Swap src with your .gif / .webp / image URL) -->
+  <img
+    id="desktop-wallpaper-img"
+    src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80"
+    onerror="this.src='https://placehold.co/1920x1080/060d1f/38bdf8?text=HemaOS+Desktop'"
+    alt="Animated Desktop Wallpaper"
+  />
+  <div id="wallpaper-tint" class="fixed inset-0 pointer-events-none bg-slate-950/35 transition-colors duration-300"></div>
+
+  <!-- Desktop Canvas -->
+  <main id="desktop-workspace" onclick="handleWorkspaceClick(event)" class="relative flex-1 w-full overflow-hidden p-3 sm:p-4">
+    <div id="desktop-icons-grid" class="grid grid-flow-col grid-rows-4 sm:grid-rows-5 gap-1.5 sm:gap-2 w-fit z-10 relative">
+
+      <button onclick="handleIconClick(event, 'explorer')" ondblclick="openApp('explorer')" class="desktop-icon group flex flex-col items-center justify-center w-24 p-2 text-center focus:outline-none">
+        <div class="w-11 h-11 rounded-lg bg-gradient-to-br from-sky-400 to-blue-600 flex items-center justify-center shadow-lg shadow-blue-500/25 mb-1">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
+            <rect x="2" y="3" width="20" height="14" rx="2" />
+            <path d="M8 21h8M12 17v4" />
+          </svg>
+        </div>
+        <span class="icon-label text-[11.5px] font-normal text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] leading-tight">This PC</span>
+      </button>
+
+      <button onclick="handleIconClick(event, 'vscode')" ondblclick="openApp('vscode')" class="desktop-icon group flex flex-col items-center justify-center w-24 p-2 text-center focus:outline-none">
+        <div class="w-11 h-11 rounded-lg bg-gradient-to-br from-blue-500 via-sky-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-sky-500/25 mb-1">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2.1" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
+          </svg>
+        </div>
+        <span class="icon-label text-[11.5px] font-normal text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] leading-tight">VS_Code.exe</span>
+      </button>
+
+      <button onclick="handleIconClick(event, 'resume')" ondblclick="openApp('resume')" class="desktop-icon group flex flex-col items-center justify-center w-24 p-2 text-center focus:outline-none">
+        <div class="w-11 h-11 rounded-lg bg-gradient-to-br from-rose-500 to-red-600 flex items-center justify-center shadow-lg shadow-rose-500/25 mb-1 relative">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
+          </svg>
+          <span class="absolute -bottom-1 -right-1 px-1 rounded bg-white text-rose-700 font-bold text-[8px] shadow">PDF</span>
+        </div>
+        <span class="icon-label text-[11.5px] font-normal text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] leading-tight break-words w-full">Resume_Hemavathy_R.pdf</span>
+      </button>
+
+      <button onclick="handleIconClick(event, 'skills')" ondblclick="openApp('skills')" class="desktop-icon group flex flex-col items-center justify-center w-24 p-2 text-center focus:outline-none">
+        <div class="w-11 h-11 rounded-lg bg-gradient-to-br from-emerald-400 to-teal-600 flex items-center justify-center shadow-lg shadow-emerald-500/25 mb-1">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 13h4l3-8 4 14 3-6h4" />
+          </svg>
+        </div>
+        <span class="icon-label text-[11.5px] font-normal text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] leading-tight">FullStack_Skills</span>
+      </button>
+
+      <button onclick="handleIconClick(event, 'terminal')" ondblclick="openApp('terminal')" class="desktop-icon group flex flex-col items-center justify-center w-24 p-2 text-center focus:outline-none">
+        <div class="w-11 h-11 rounded-lg bg-slate-900 border border-slate-600 flex items-center justify-center shadow-lg mb-1">
+          <span class="font-mono font-bold text-sm text-sky-400">&gt;_</span>
+        </div>
+        <span class="icon-label text-[11.5px] font-normal text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] leading-tight">Windows_Terminal</span>
+      </button>
+
+      <button onclick="handleIconClick(event, 'contact')" ondblclick="openApp('contact')" class="desktop-icon group flex flex-col items-center justify-center w-24 p-2 text-center focus:outline-none">
+        <div class="w-11 h-11 rounded-lg bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center shadow-lg shadow-indigo-500/25 mb-1">
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="1.9" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <span class="icon-label text-[11.5px] font-normal text-white drop-shadow-[0_1px_2px_rgba(0,0,0,0.9)] leading-tight">Outlook_Contact</span>
+      </button>
+
+    </div>
+
+    <!-- Active Windows Mount Point -->
+    <div id="windows-layer" class="inset-0 pointer-events-none"></div>
+  </main>
+
+  <!-- Start Menu -->
+  <div id="start-menu" onclick="event.stopPropagation()" class="hidden win11-flyout fixed bottom-14 left-1/2 -translate-x-1/2 w-[94vw] max-w-[560px] rounded-xl text-slate-100 z-[990] overflow-hidden transition-all">
+    <div class="p-5 pb-4 space-y-4">
+      <div class="relative">
+        <svg class="w-4 h-4 text-sky-400 absolute left-3.5 top-1/2 -translate-y-1/2" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+        </svg>
+        <input id="start-search-input" type="text" oninput="renderStartMenuPinned(this.value)" placeholder="Search apps, SQL scripts, skills, and resume..." class="w-full bg-slate-950/80 border border-white/15 focus:border-sky-400 rounded-full pl-10 pr-4 py-2 text-xs text-white placeholder-slate-400 focus:outline-none" />
+      </div>
+
+      <div>
+        <div class="flex items-center justify-between mb-2.5 px-1">
+          <span class="text-xs font-semibold text-slate-200">Pinned</span>
+          <button onclick="openApp('explorer'); closeAllFlyouts();" class="text-[11px] px-2.5 py-0.5 rounded bg-white/10 hover:bg-white/15 text-slate-200 transition">All apps &gt;</button>
+        </div>
+        <div id="start-pinned-grid" class="grid grid-cols-4 sm:grid-cols-6 gap-2"></div>
+      </div>
+
+      <div class="pt-1">
+        <div class="flex items-center justify-between mb-2 px-1">
+          <span class="text-xs font-semibold text-slate-200">Recommended</span>
+          <span class="text-[10px] font-mono text-sky-400">FULL STACK + 8 YRS DB</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
+          <button onclick="openApp('vscode'); closeAllFlyouts();" class="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white/10 text-left transition">
+            <div class="w-8 h-8 rounded bg-sky-500/20 border border-sky-500/30 flex items-center justify-center text-sky-400 font-bold text-[10px]">TSX</div>
+            <div class="min-w-0">
+              <div class="text-xs font-medium text-slate-100 truncate">VS_Code.exe — Full Stack IDE</div>
+              <div class="text-[10px] text-slate-400">React + REST API + SQL Architecture</div>
+            </div>
+          </button>
+          <button onclick="openApp('explorer'); closeAllFlyouts();" class="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white/10 text-left transition">
+            <div class="w-8 h-8 rounded bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-[10px]">APP</div>
+            <div class="min-w-0">
+              <div class="text-xs font-medium text-slate-100 truncate">Full_Stack_Projects/</div>
+              <div class="text-[10px] text-slate-400">Web Apps &amp; Editable Portfolio Slots</div>
+            </div>
+          </button>
+          <button onclick="openApp('resume'); closeAllFlyouts();" class="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white/10 text-left transition">
+            <div class="w-8 h-8 rounded bg-rose-500/20 border border-rose-500/30 flex items-center justify-center text-rose-400 font-bold text-[10px]">PDF</div>
+            <div class="min-w-0">
+              <div class="text-xs font-medium text-slate-100 truncate">Resume_Hemavathy_R.pdf</div>
+              <div class="text-[10px] text-slate-400">Full Stack Dev • 8 Yrs Data Eng</div>
+            </div>
+          </button>
+          <button onclick="openApp('skills'); closeAllFlyouts();" class="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white/10 text-left transition">
+            <div class="w-8 h-8 rounded bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-[10px]">DEV</div>
+            <div class="min-w-0">
+              <div class="text-xs font-medium text-slate-100 truncate">FullStack_Skills.perfmon</div>
+              <div class="text-[10px] text-slate-400">JS/React, Python/Node, SQL, AWS</div>
+            </div>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <div class="bg-slate-950/75 border-t border-white/10 px-6 py-3 flex items-center justify-between">
+      <button onclick="openApp('resume'); closeAllFlyouts();" class="flex items-center gap-2.5 hover:bg-white/10 px-2 py-1 rounded-lg transition">
+        <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center font-bold text-xs text-white shadow">HR</div>
+        <div class="text-left">
+          <div class="text-xs font-semibold text-white">Hemavathy R</div>
+          <div class="text-[10px] text-slate-400">Software Engineer • Mumbai</div>
+        </div>
+      </button>
+      <div class="flex items-center gap-1">
+        <button onclick="openApp('contact'); closeAllFlyouts();" title="Contact Hemavathy" class="p-2 rounded-lg hover:bg-white/10 text-slate-300 hover:text-white transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+        </button>
+        <button onclick="resetDesktop(); closeAllFlyouts();" title="Restart Workspace" class="p-2 rounded-lg hover:bg-rose-500/20 text-slate-300 hover:text-rose-400 transition">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M18.364 5.636a9 9 0 11-12.728 0M12 3v9" />
+          </svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Search Modal (Ctrl/Cmd + K) -->
+  <div id="win-search-overlay" onclick="if(event.target===this) closeAllFlyouts()" class="hidden fixed inset-0 bg-slate-950/40 backdrop-blur-sm z-[995] flex items-end sm:items-center justify-center pb-16 sm:pb-0 p-4">
+    <div class="win11-flyout w-full max-w-xl rounded-xl overflow-hidden text-slate-100">
+      <div class="p-4 border-b border-white/10 flex items-center gap-3">
+        <svg class="w-5 h-5 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+        </svg>
+        <input id="global-search-input" type="text" oninput="runGlobalSearch(this.value)" placeholder="Search Full Stack apps, VS Code files, React/Python/SQL skills, or resume..." class="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none" />
+        <button onclick="closeAllFlyouts()" class="px-2 py-0.5 rounded bg-white/10 text-[10px] font-mono text-slate-300">ESC</button>
+      </div>
+      <div id="global-search-results" class="max-h-80 overflow-y-auto p-3 space-y-1.5"></div>
+    </div>
+  </div>
+
+  <!-- Quick Settings Flyout -->
+  <div id="quick-settings-flyout" onclick="event.stopPropagation()" class="hidden win11-flyout fixed bottom-14 right-3 w-80 rounded-xl p-4 text-slate-100 z-[990] space-y-4">
+    <div class="flex items-center justify-between">
+      <span class="text-xs font-semibold">Quick Settings</span>
+      <span class="px-2 py-0.5 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-300 font-mono text-[10px]">CLUSTER ONLINE</span>
+    </div>
+
+    <div class="grid grid-cols-3 gap-2">
+      <button onclick="setWallpaper('dark-bloom')" id="tile-dark-bloom" class="p-2.5 rounded-lg bg-sky-500 text-slate-950 font-semibold text-left transition flex flex-col justify-between h-16">
+        <span class="text-xs">Dark Bloom</span>
+        <span class="text-[10px] opacity-80">Theme</span>
+      </button>
+      <button onclick="setWallpaper('light-bloom')" id="tile-light-bloom" class="p-2.5 rounded-lg bg-white/10 hover:bg-white/15 text-slate-100 font-medium text-left transition flex flex-col justify-between h-16">
+        <span class="text-xs">Light Bloom</span>
+        <span class="text-[10px] text-slate-400">Theme</span>
+      </button>
+      <button onclick="setWallpaper('sql-blue')" id="tile-sql-blue" class="p-2.5 rounded-lg bg-white/10 hover:bg-white/15 text-slate-100 font-medium text-left transition flex flex-col justify-between h-16">
+        <span class="text-xs">Code Grid</span>
+        <span class="text-[10px] text-slate-400">Theme</span>
+      </button>
+      <button onclick="openApp('vscode'); closeAllFlyouts();" class="p-2.5 rounded-lg bg-white/10 hover:bg-white/15 text-slate-100 font-medium text-left transition flex flex-col justify-between h-16">
+        <span class="text-xs">VS Code</span>
+        <span class="text-[10px] text-sky-400">IDE Ready</span>
+      </button>
+      <button onclick="openApp('explorer'); closeAllFlyouts();" class="p-2.5 rounded-lg bg-white/10 hover:bg-white/15 text-slate-100 font-medium text-left transition flex flex-col justify-between h-16">
+        <span class="text-xs">Projects</span>
+        <span class="text-[10px] text-emerald-400">Full Stack</span>
+      </button>
+      <button onclick="copyText('hema12ramesh@gmail.com', 'Email'); closeAllFlyouts();" class="p-2.5 rounded-lg bg-white/10 hover:bg-white/15 text-slate-100 font-medium text-left transition flex flex-col justify-between h-16">
+        <span class="text-xs">Copy Email</span>
+        <span class="text-[10px] text-amber-400">Clipboard</span>
+      </button>
+    </div>
+
+    <div class="pt-2 border-t border-white/10 space-y-2.5 text-xs">
+      <div>
+        <div class="flex justify-between text-[11px] mb-1">
+          <span class="text-slate-300">Full Stack Transition (React, JS, Python/Node, REST)</span>
+          <span class="font-mono text-sky-400 font-semibold">ACTIVE BUILDER</span>
+        </div>
+        <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+          <div class="h-full bg-sky-400 rounded-full" style="width: 94%"></div>
+        </div>
+      </div>
+      <div>
+        <div class="flex justify-between text-[11px] mb-1">
+          <span class="text-slate-300">Backend &amp; DB Architecture (8 Yrs • 99.9% SLA)</span>
+          <span class="font-mono text-emerald-400 font-semibold">PRODUCTION PROVEN</span>
+        </div>
+        <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
+          <div class="h-full bg-emerald-400 rounded-full" style="width: 99.9%"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Notification Center -->
+  <div id="notification-flyout" onclick="event.stopPropagation()" class="hidden win11-flyout fixed bottom-14 right-3 w-80 sm:w-96 rounded-xl p-4 text-slate-100 z-[990] space-y-3">
+    <div class="flex items-center justify-between border-b border-white/10 pb-2">
+      <span class="text-xs font-semibold">Engineering Highlights &amp; Career Status</span>
+      <span class="text-[10px] font-mono text-sky-400">3 Active</span>
+    </div>
+    <div class="space-y-2 text-xs">
+      <div class="p-2.5 rounded-lg bg-white/5 border border-white/10">
+        <div class="flex justify-between text-[10px] text-sky-400 font-mono mb-0.5">
+          <span>FULL STACK PORTFOLIO</span>
+          <span>OPEN TO ROLES</span>
+        </div>
+        <p class="text-slate-200 font-medium">Seeking Full Stack Developer roles combining React/JS/Python APIs with 8 yrs DB architecture.</p>
+      </div>
+      <div class="p-2.5 rounded-lg bg-white/5 border border-white/10">
+        <div class="flex justify-between text-[10px] text-emerald-400 font-mono mb-0.5">
+          <span>END-TO-END PERFORMANCE</span>
+          <span>+40% SPEEDUP</span>
+        </div>
+        <p class="text-slate-200 font-medium">Built KPI dashboards &amp; automated workflows cutting processing time by 50%–60%.</p>
+      </div>
+      <div class="p-2.5 rounded-lg bg-white/5 border border-white/10">
+        <div class="flex justify-between text-[10px] text-amber-400 font-mono mb-0.5">
+          <span>CUSTOMIZE YOUR PROJECTS</span>
+          <span>THIS PC &gt; + ADD</span>
+        </div>
+        <p class="text-slate-200 font-medium">Click "+ Add / Edit Project" inside This PC to plug in your GitHub &amp; live full stack app links.</p>
+      </div>
+    </div>
+    <div class="pt-2 border-t border-white/10 text-center">
+      <div id="calendar-full-date" class="text-xs font-semibold text-sky-300">Thursday, November 19, 2026</div>
+      <div class="text-[10px] text-slate-400 mt-0.5">Full Stack Developer • Mumbai / Remote Ready</div>
+    </div>
+  </div>
+
+  <!-- Desktop Right-Click Context Menu -->
+  <div id="desktop-context-menu" onclick="event.stopPropagation()" class="hidden win11-flyout fixed w-56 rounded-lg py-1.5 text-xs text-slate-100 z-[999]">
+    <button onclick="openApp('explorer'); closeAllFlyouts();" class="w-full text-left px-3.5 py-1.5 hover:bg-white/10 flex items-center justify-between">
+      <span>Open This PC (Projects)</span>
+      <span class="text-[10px] text-slate-400">Enter</span>
+    </button>
+    <button onclick="openApp('vscode'); closeAllFlyouts();" class="w-full text-left px-3.5 py-1.5 hover:bg-white/10 flex items-center justify-between">
+      <span>Open in VS Code</span>
+      <span class="text-[10px] text-sky-400">IDE</span>
+    </button>
+    <button onclick="openApp('resume'); closeAllFlyouts();" class="w-full text-left px-3.5 py-1.5 hover:bg-white/10 flex items-center justify-between">
+      <span>View Resume (PDF)</span>
+      <span class="text-[10px] text-rose-400">PDF</span>
+    </button>
+    <div class="my-1 border-t border-white/10"></div>
+    <button onclick="openApp('terminal'); closeAllFlyouts();" class="w-full text-left px-3.5 py-1.5 hover:bg-white/10">
+      Open in Windows Terminal
+    </button>
+    <button onclick="cycleWallpaper(); closeAllFlyouts();" class="w-full text-left px-3.5 py-1.5 hover:bg-white/10">
+      Next Desktop Background
+    </button>
+    <button onclick="resetDesktop(); closeAllFlyouts();" class="w-full text-left px-3.5 py-1.5 hover:bg-white/10">
+      Refresh Desktop
+    </button>
+  </div>
+
+  <!-- Status Toast -->
+  <div id="win-toast" class="hidden fixed bottom-16 right-4 z-[999] bg-slate-900/95 border border-sky-400/40 text-white px-4 py-2.5 rounded-lg shadow-2xl text-xs flex items-center gap-2.5">
+    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-ping"></span>
+    <span id="win-toast-text">Copied to clipboard</span>
+  </div>
+
+  <!-- Taskbar -->
+  <footer onclick="event.stopPropagation()" class="win11-taskbar w-full px-2 sm:px-3 flex items-center justify-between z-50 shrink-0 relative">
+
+    <button onclick="openApp('vscode')" title="Open VS Code Full Stack Studio" class="hidden md:flex items-center gap-2 px-2.5 py-1.5 rounded-md hover:bg-white/10 transition text-left">
+      <div class="w-6 h-6 rounded bg-sky-500/20 border border-sky-500/40 flex items-center justify-center text-sky-400">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M16 18l6-6-6-6M8 6l-6 6 6 6" />
+        </svg>
+      </div>
+      <div class="leading-tight">
+        <div class="text-[11px] font-semibold">Full Stack &amp; DB</div>
+        <div class="text-[10px] text-emerald-400 font-mono">99.9% SLA • 8 Yrs</div>
+      </div>
+    </button>
+
+    <div class="flex items-center gap-1 sm:gap-1.5 mx-auto">
+      <button id="start-btn" onclick="toggleFlyout('start-menu', event)" title="Start" class="taskbar-app-btn w-10 h-10 flex items-center justify-center">
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="none">
+          <rect x="2" y="2" width="9" height="9" rx="1.2" fill="#38bdf8"/>
+          <rect x="13" y="2" width="9" height="9" rx="1.2" fill="#60a5fa"/>
+          <rect x="2" y="13" width="9" height="9" rx="1.2" fill="#0ea5e9"/>
+          <rect x="13" y="13" width="9" height="9" rx="1.2" fill="#3b82f6"/>
+        </svg>
+      </button>
+
+      <button onclick="openGlobalSearch()" title="Search (Ctrl + K)" class="hidden sm:flex items-center gap-2 h-8 px-3 rounded-full bg-white/10 hover:bg-white/15 border border-white/15 text-xs opacity-90 transition">
+        <svg class="w-3.5 h-3.5 text-sky-400" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+        </svg>
+        <span class="text-[11.5px] pr-2">Search</span>
+      </button>
+
+      <button onclick="openGlobalSearch()" title="Search" class="sm:hidden taskbar-app-btn w-9 h-9 flex items-center justify-center">
+        <svg class="w-4 h-4 text-sky-400" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
+        </svg>
+      </button>
+
+      <button onclick="tileWindows()" title="Tile Open Windows" class="hidden sm:flex taskbar-app-btn w-9 h-9 items-center justify-center">
+        <svg class="w-4 h-4 opacity-85" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <rect x="3" y="4" width="8" height="16" rx="1.5" />
+          <rect x="13" y="4" width="8" height="16" rx="1.5" />
+        </svg>
+      </button>
+
+      <div class="h-5 w-[1px] bg-white/15 mx-0.5"></div>
+
+      <div id="taskbar-apps" class="flex items-center gap-1"></div>
+    </div>
+
+    <div class="flex items-center gap-1">
+      <button onclick="installAsApp()" id="install-app-btn" title="Install HemaOS as a Desktop / Mobile App" class="hidden sm:flex items-center gap-1.5 px-2.5 py-1 rounded-md bg-sky-500/20 hover:bg-sky-500/30 border border-sky-400/35 text-sky-300 text-[11px] font-semibold transition">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2M7 10l5 5 5-5M12 15V3" />
+        </svg>
+        <span>Install App</span>
+      </button>
+
+      <button onclick="toggleFlyout('quick-settings-flyout', event)" title="Quick Settings & Themes" class="flex items-center gap-2 px-2 py-1.5 rounded-md hover:bg-white/10 transition text-xs">
+        <span class="w-2 h-2 rounded-full bg-emerald-400"></span>
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M8.111 16.404a5.5 5.5 0 017.778 0M12 20h.01m-7.08-7.071c3.904-3.905 10.236-3.905 14.141 0M1.394 9.393c5.857-5.857 15.355-5.857 21.213 0" />
+        </svg>
+        <svg class="w-3.5 h-3.5 hidden sm:block" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15.536 8.464a5 5 0 010 7.072M18.364 5.636a9 9 0 010 12.728M11 5L6 9H2v6h4l5 4V5z" />
+        </svg>
+      </button>
+
+      <button onclick="toggleFlyout('notification-flyout', event)" title="Notifications & Calendar" class="px-2 py-1 rounded-md hover:bg-white/10 transition text-right leading-tight">
+        <div id="tray-time" class="text-[11px] font-medium">11:09 PM</div>
+        <div id="tray-date" class="text-[10px] opacity-80">11/19/2026</div>
+      </button>
+
+      <button onclick="minimizeAllWindows()" title="Show Desktop" class="w-2 h-8 ml-1 border-l border-white/20 hover:bg-white/20 transition"></button>
+    </div>
+  </footer>
+
+  <script>
+    const APPS = {
+      explorer: {
+        id: 'explorer',
+        title: 'This PC — Full Stack Web Apps & Enterprise Data Systems',
+        shortTitle: 'This PC',
+        iconBg: 'from-sky-400 to-blue-600',
+        iconSvg: `<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>`,
+        defaultW: 880,
+        defaultH: 560
+      },
+      vscode: {
+        id: 'vscode',
+        title: 'Visual Studio Code — FullStack_Architecture_Workspace',
+        shortTitle: 'VS Code',
+        iconBg: 'from-blue-500 to-indigo-600',
+        iconSvg: `<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M16 18l6-6-6-6M8 6l-6 6 6 6"/></svg>`,
+        defaultW: 920,
+        defaultH: 560
+      },
+      resume: {
+        id: 'resume',
+        title: 'Resume_Hemavathy_R.pdf — Microsoft Edge',
+        shortTitle: 'Resume.pdf',
+        iconBg: 'from-rose-500 to-red-600',
+        iconSvg: `<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>`,
+        defaultW: 850,
+        defaultH: 575
+      },
+      skills: {
+        id: 'skills',
+        title: 'Skills_Monitor — Full Stack & Data Engineering Stack',
+        shortTitle: 'Skills Monitor',
+        iconBg: 'from-emerald-400 to-teal-600',
+        iconSvg: `<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 13h4l3-8 4 14 3-6h4"/></svg>`,
+        defaultW: 860,
+        defaultH: 550
+      },
+      terminal: {
+        id: 'terminal',
+        title: 'Windows Terminal — PowerShell / Node & SQL CLI',
+        shortTitle: 'Terminal',
+        iconBg: 'from-slate-700 to-slate-900',
+        iconSvg: `<span class="font-mono font-bold text-[11px] text-sky-400">&gt;_</span>`,
+        defaultW: 750,
+        defaultH: 465
+      },
+      contact: {
+        id: 'contact',
+        title: 'Outlook — Contact Hemavathy R',
+        shortTitle: 'Outlook',
+        iconBg: 'from-blue-500 to-indigo-600',
+        iconSvg: `<svg class="w-4 h-4 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/></svg>`,
+        defaultW: 720,
+        defaultH: 500
+      }
+    };
+
+    const STORAGE_KEYS = {
+      links: 'hemaos_social_links_v1',
+      projects: 'hemaos_fullstack_projects_v1'
+    };
+
+    const DEFAULT_LINKS = {
+      github: 'https://github.com/hemavathy-r?tab=repositories',
+      linkedin: 'https://www.linkedin.com/in/hemavathy-ramesh-babu-41942a141/',
+      portfolio: 'https://hemaos-portfolio.vercel.app'
+    };
+
+    const DEFAULT_PROJECTS = [
+      {
+        id: 'proj-1',
+        title: 'HemaOS — Windows 11 Interactive Developer Desktop',
+        category: 'Frontend UI & Systems Engineering',
+        tagline: 'Browser-based OS window manager, VS Code IDE simulator & CLI shell',
+        description: 'Custom-built responsive Windows 11 desktop environment featuring multi-window z-index management, drag-and-drop framing, local storage project CRUD, interactive IDE previewer, and PowerShell CLI.',
+        stack: ['JavaScript', 'Tailwind CSS', 'HTML5', 'LocalStorage API', 'Responsive UI'],
+        metrics: 'Zero-Dependency Window Engine • 100% Responsive',
+        githubUrl: 'https://github.com/',
+        liveUrl: '#preview-hemaos'
+      },
+      { 
+	id: 'proj-2',
+        title: 'PokeHub — Full-Stack Pokedex & Trainer Squad Manager',
+        category: 'Full-Stack Web & Database Engineering',
+        tagline: 'API-driven Pokedex explorer, stat visualizer & SQL-persisted team builder',
+        description: 'Full-stack web application integrating PokeAPI with a relational SQL backend for user authentication, custom squad persistence, and battle-stat analytics. Features multi-criteria indexing, type-effectiveness matrices, and normalized schema storage for trainer rosters.',
+        stack: ['JavaScript', 'HTML5', 'Tailwind CSS', 'REST API (PokeAPI)', 'SQL Database', 'Backend API'],
+        metrics: 'Relational Squad Persistence • 1,000+ Indexed Species',
+        githubUrl: 'https://github.com/',
+        liveUrl: '#preview-pokehub'
+      }
+    ];
+
+    const VSCODE_FILES = {
+      'App.tsx': {
+        lang: 'TypeScript React (Frontend UI)',
+        badge: 'TSX',
+        color: 'sky',
+        code: `// Frontend: React + TypeScript Dashboard Component
+// Bridges interactive UI state with high-throughput REST APIs & SQL backends
+
+import React, { useState, useEffect } from 'react';
+
+interface SLARecord {
+  serviceName: string;
+  uptimePct: number;
+  avgLatencyMs: number;
+  openDefects: number;
+}
+
+export const ProductionSLADashboard: React.FC = () => {
+  const [metrics, setMetrics] = useState<SLARecord[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  useEffect(() => {
+    fetch('/api/v1/telemetry/sla-summary?window=24h')
+      .then((res) => res.json())
+      .then((data) => {
+        setMetrics(data.records);
+        setLoading(false);
+      });
+  }, []);
+
+  return (
+    <section className="grid grid-cols-1 md:grid-cols-3 gap-4 p-6">
+      {metrics.map((item) => (
+        <article key={item.serviceName} className="rounded-xl border p-4 shadow">
+          <h3 className="font-bold text-slate-900">{item.serviceName}</h3>
+          <p className="text-emerald-600 font-mono">{item.uptimePct}% SLA</p>
+          <span className="text-xs text-slate-500">Latency: {item.avgLatencyMs}ms</span>
+        </article>
+      ))}
+    </section>
+  );
+};`,
+        previewTitle: 'Rendered React Component Output (GET /api/v1/telemetry/sla-summary)',
+        previewOutput: `✓ Compiled App.tsx cleanly (0 errors, 0 warnings)
+┌────────────────────────────┬───────────┬──────────────┬──────────────┐
+│ Service Module             │ SLA       │ Avg Latency  │ 24h Defects  │
+├────────────────────────────┼───────────┼──────────────┼──────────────┤
+│ Healthcare Claims API      │ 99.94%    │ 42 ms (-40%) │ 0 Critical   │
+│ Telecom Billing Engine     │ 99.91%    │ 68 ms (-60%) │ 95% Resolved │
+│ Executive KPI Sync Worker  │ 99.98%    │ 31 ms (-50%) │ 0 Critical   │
+└────────────────────────────┴───────────┴──────────────┴──────────────┘`
+      },
+      'api_routes.py': {
+        lang: 'Python / FastAPI REST Backend',
+        badge: 'PY',
+        color: 'emerald',
+        code: `# Backend: RESTful API Layer connecting Frontend Apps to PostgreSQL / SQL Server
+# Built with parameterized queries, connection pooling & automated validation
+
+from fastapi import APIRouter, HTTPException, Query
+from pydantic import BaseModel
+from db_pool import get_db_connection
+
+router = APIRouter(prefix="/api/v1/telemetry", tags=["FullStack-Telemetry"])
+
+class ReconciliationPayload(BaseModel):
+    batch_id: str
+    source_system: str
+    validate_rules: bool = True
+
+@router.get("/sla-summary")
+async def fetch_sla_summary(window: str = Query("24h", pattern="^(24h|7d|30d)$")):
+    async with get_db_connection() as conn:
+        rows = await conn.fetch("""
+            SELECT service_name, uptime_pct, avg_latency_ms, open_defects
+            FROM dbo.vw_executive_sla_kpi
+            WHERE reporting_window = $1
+            ORDER BY uptime_pct DESC;
+        """, window)
+        return {"status": "ok", "count": len(rows), "records": [dict(r) for r in rows]}`,
+        previewTitle: 'API Endpoint Test Runner — HTTP 200 OK (18ms)',
+        previewOutput: `GET http://localhost:8000/api/v1/telemetry/sla-summary?window=24h
+Status: 200 OK | Content-Type: application/json | Execution: 18.4ms
+
+{
+  "status": "ok",
+  "count": 3,
+  "records": [
+    { "service_name": "Healthcare Claims API", "uptime_pct": 99.94, "avg_latency_ms": 42, "open_defects": 0 },
+    { "service_name": "Telecom Billing Engine", "uptime_pct": 99.91, "avg_latency_ms": 68, "open_defects": 1 }
+  ]
+}`
+      },
+      'schema_and_indexes.sql': {
+        lang: 'T-SQL / PostgreSQL Database Layer',
+        badge: 'SQL',
+        color: 'amber',
+        code: `-- Database Layer: High-Throughput Schema & Covering Index Strategy
+-- Reduces API endpoint latency by 40% & batch processing window by 50%
+
+CREATE NONCLUSTERED INDEX IX_App_Telemetry_SLA_Cover
+ON dbo.Production_Service_Telemetry (Reporting_Window, Service_Name)
+INCLUDE (Uptime_Pct, Avg_Latency_Ms, Open_Defects, Last_Synced_At)
+WHERE Is_Active = 1;
+
+-- Parameterized Stored Procedure for Full Stack Reconciliation Portal
+CREATE OR ALTER PROCEDURE dbo.usp_Run_Billing_Reconciliation
+    @BatchDate DATE,
+    @MaxTolerance DECIMAL(10,2) = 0.01
+AS
+BEGIN
+    SET NOCOUNT ON;
+    SELECT Batch_ID, Source_Total, Target_Total, (Source_Total - Target_Total) AS Variance
+    FROM dbo.Billing_Pipeline_Audit WITH (NOLOCK)
+    WHERE Batch_Date = @BatchDate AND ABS(Source_Total - Target_Total) > @MaxTolerance;
+END;`,
+        previewTitle: 'Database Query Execution Plan & Index Telemetry',
+        previewOutput: `✓ Index Seek on IX_App_Telemetry_SLA_Cover (0 Key Lookups)
+✓ Logical Reads dropped from 54,200 -> 412 (-99.2% I/O overhead)
+✓ End-to-End API + DB Response Time: 42ms (Target < 100ms)`
+      },
+      'architecture.json': {
+        lang: 'Full Stack System Blueprint',
+        badge: 'JSON',
+        color: 'purple',
+        code: `{
+  "engineer": "Hemavathy R",
+  "target_role": "Full Stack Developer (Data-Intensive Web Applications)",
+  "experience_years": 8,
+  "full_stack_capabilities": {
+    "frontend": ["HTML5", "CSS3", "Tailwind CSS", "JavaScript (ES6+)", "React", "Responsive Dashboards"],
+    "backend": ["Python", "Node.js", "RESTful APIs", "T-SQL", "Oracle PL/SQL", "Shell Automation"],
+    "databases": ["SQL Server", "PostgreSQL", "Oracle", "Query Optimization", "RPO/RTO & Clustering"],
+    "cloud_devops": ["AWS Developer Associate", "Git", "CI/CD Pipelines", "Agile/Scrum", "Unit & Integration Testing"]
+  },
+  "value_proposition": "Builds fast, reliable full-stack web apps backed by 8 years of production database engineering."
+}`,
+        previewTitle: 'System Architecture Verification',
+        previewOutput: `✓ Full Stack Blueprint Validated
+✓ Frontend + REST API + Indexed Relational DB Layer Ready for Production`
+      }
+    };
+
+    const SEARCH_INDEX = [
+      { title: 'Resume_Hemavathy_R.pdf — Full Stack & Database Engineer CV', desc: 'Complete updated resume, SVCE B.Tech IT, Experience, Skills & Print PDF', app: 'resume', tag: 'PDF' },
+      { title: 'This PC — Full Stack Web Projects & Enterprise Experience', desc: 'Editable Full Stack projects + AssureCare HealthTech & Accenture roles', app: 'explorer', tag: 'WORKS' },
+      { title: 'VS_Code.exe — Full Stack Code & SQL Workbench', desc: 'React App.tsx, Python FastAPI routes, and SQL Index Optimization', app: 'vscode', tag: 'IDE' },
+      { title: 'Skills_Monitor — Categorized Tech Stack & Credentials', desc: 'Languages & Web, Databases & Data Engineering, AWS & Agile TDD', app: 'skills', tag: 'SKILLS' },
+      { title: 'AssureCare HealthTech LLP (Nov 2022 – May 2026)', desc: 'Senior Configuration Engineer • +40% query perf, -50% time, 99.9% SLA', app: 'explorer', tag: 'EXP' },
+      { title: 'Accenture Solutions Pvt. Ltd (Oct 2018 – Nov 2022)', desc: 'Application Development Analyst & Associate • 25+ automated workflows (-60%)', app: 'explorer', tag: 'EXP' },
+      { title: 'Education — SVCE, Anna University (B.Tech IT)', desc: 'Bachelor of Technology in Information Technology (2014–2018), Chennai', app: 'resume', tag: 'EDU' },
+      { title: 'Windows_Terminal (PowerShell / Node & SQL CLI)', desc: 'Run whoami, experience, skills, education, certifications, internships', app: 'terminal', tag: 'CLI' },
+      { title: 'Outlook_Contact — Hire / Connect', desc: 'hema12ramesh@gmail.com | (+91) 99623 82345 | Mumbai, India', app: 'contact', tag: 'MAIL' }
+    ];
+
+    const state = {
+      windows: {},
+      topZ: 30,
+      activeWindow: null,
+      wallpaper: 'dark-bloom',
+      explorerTab: 'fullstack',
+      vscodeFile: 'App.tsx'
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    function readStorage(key, fallback) {
+      try {
+        const raw = localStorage.getItem(key);
+        return raw ? JSON.parse(raw) : fallback;
+      } catch {
+        return fallback;
+      }
+    }
+
+    function writeStorage(key, value) {
+      try {
+        localStorage.setItem(key, JSON.stringify(value));
+      } catch {}
+    }
+
+    const getSocialLinks = () => ({ ...DEFAULT_LINKS, ...readStorage(STORAGE_KEYS.links, {}) });
+    const getProjects = () => readStorage(STORAGE_KEYS.projects, DEFAULT_PROJECTS);
+
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;');
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+      initPWA();
+      updateClock();
+      setInterval(updateClock, 1000);
+      renderStartMenuPinned();
+      renderTaskbar();
+
+      openApp('explorer', { x: 120, y: 20 });
+      setTimeout(() => openApp('resume', { x: 230, y: 34 }), 120);
+    });
+
+    // Progressive Web App (PWA) manifest, offline worker & install handler
+    let deferredInstallPrompt = null;
+
+    function initPWA() {
+      const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><rect width="512" height="512" rx="96" fill="#060d1f"/><rect x="96" y="96" width="144" height="144" rx="24" fill="#38bdf8"/><rect x="272" y="96" width="144" height="144" rx="24" fill="#60a5fa"/><rect x="96" y="272" width="144" height="144" rx="24" fill="#0ea5e9"/><rect x="272" y="272" width="144" height="144" rx="24" fill="#3b82f6"/></svg>`;
+      const iconUrl = `data:image/svg+xml;charset=utf-8,${encodeURIComponent(iconSvg)}`;
+
+      const manifest = {
+        name: 'HemaOS — Hemavathy R Portfolio',
+        short_name: 'HemaOS',
+        description: 'Interactive Windows 11 Full Stack & Database Engineer Portfolio',
+        start_url: './',
+        display: 'standalone',
+        background_color: '#060d1f',
+        theme_color: '#060d1f',
+        icons: [
+          { src: iconUrl, sizes: '192x192', type: 'image/svg+xml', purpose: 'any maskable' },
+          { src: iconUrl, sizes: '512x512', type: 'image/svg+xml', purpose: 'any maskable' }
+        ]
+      };
+
+      const manifestLink = document.createElement('link');
+      manifestLink.rel = 'manifest';
+      manifestLink.href = URL.createObjectURL(new Blob([JSON.stringify(manifest)], { type: 'application/json' }));
+      document.head.appendChild(manifestLink);
+
+      if ('serviceWorker' in navigator && location.protocol === 'https:') {
+        const swCode = `
+          const CACHE = 'hemaos-v1';
+          self.addEventListener('install', (e) => {
+            e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./'])));
+          });
+          self.addEventListener('fetch', (e) => {
+            e.respondWith(fetch(e.request).catch(() => caches.match(e.request)));
+          });
+        `;
+        const swUrl = URL.createObjectURL(new Blob([swCode], { type: 'application/javascript' }));
+        navigator.serviceWorker.register(swUrl).catch(() => {});
+      }
+
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredInstallPrompt = e;
+        $('install-app-btn')?.classList.remove('hidden');
+      });
+    }
+
+    async function installAsApp() {
+      if (deferredInstallPrompt) {
+        deferredInstallPrompt.prompt();
+        const choice = await deferredInstallPrompt.userChoice;
+        if (choice.outcome === 'accepted') {
+          showToast('HemaOS installed as a standalone desktop app!');
+          $('install-app-btn')?.classList.add('hidden');
+        }
+        deferredInstallPrompt = null;
+      } else {
+        switchExplorerTab('install');
+        openApp('explorer');
+      }
+    }
+
+    function updateClock() {
+      const now = new Date();
+      if ($('tray-time')) {
+        $('tray-time').textContent = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
+      }
+      if ($('tray-date')) {
+        $('tray-date').textContent = now.toLocaleDateString('en-US', { month: 'numeric', day: 'numeric', year: 'numeric' });
+      }
+      if ($('calendar-full-date')) {
+        $('calendar-full-date').textContent = now.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+      }
+    }
+
+    // Desktop selection & flyouts
+    function handleIconClick(e, appId) {
+      e.stopPropagation();
+      document.querySelectorAll('.desktop-icon').forEach(el => el.classList.remove('selected'));
+      e.currentTarget.classList.add('selected');
+      if (window.innerWidth < 768) openApp(appId);
+    }
+
+    function handleWorkspaceClick(e) {
+      if (e.target.id === 'desktop-workspace' || e.target.id === 'desktop-icons-grid') {
+        document.querySelectorAll('.desktop-icon').forEach(el => el.classList.remove('selected'));
+        closeAllFlyouts();
+      }
+    }
+
+    function toggleFlyout(id, e) {
+      if (e) e.stopPropagation();
+      const target = $(id);
+      const isHidden = target.classList.contains('hidden');
+      closeAllFlyouts();
+      if (isHidden) {
+        target.classList.remove('hidden');
+        if (id === 'start-menu') setTimeout(() => $('start-search-input')?.focus(), 50);
+      }
+    }
+
+    function closeAllFlyouts() {
+      ['start-menu', 'win-search-overlay', 'quick-settings-flyout', 'notification-flyout', 'desktop-context-menu']
+        .forEach(id => $(id)?.classList.add('hidden'));
+    }
+
+    function showContextMenu(e) {
+      if (e.target.closest('.win11-window') || e.target.closest('.win11-taskbar')) return;
+      e.preventDefault();
+      closeAllFlyouts();
+      const menu = $('desktop-context-menu');
+      menu.classList.remove('hidden');
+      menu.style.left = `${Math.min(e.clientX, window.innerWidth - 235)}px`;
+      menu.style.top = `${Math.min(e.clientY, window.innerHeight - 230)}px`;
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+        e.preventDefault();
+        openGlobalSearch();
+      } else if (e.key === 'Escape') {
+        closeAllFlyouts();
+      }
+    });
+
+    function setWallpaper(theme) {
+      state.wallpaper = theme;
+      document.body.classList.remove('theme-dark-bloom', 'theme-light-bloom', 'theme-sql-blue');
+      document.body.classList.add(`theme-${theme}`);
+
+      const wallpapers = {
+        'dark-bloom': {
+          src: 'https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80',
+          tint: 'fixed inset-0 pointer-events-none bg-slate-950/35 transition-colors duration-300'
+        },
+        'light-bloom': {
+          src: 'https://images.unsplash.com/photo-1579546929518-9e396f3cc809?auto=format&fit=crop&w=1920&q=80',
+          tint: 'fixed inset-0 pointer-events-none bg-white/25 transition-colors duration-300'
+        },
+        'sql-blue': {
+          src: 'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=1920&q=80',
+          tint: 'fixed inset-0 pointer-events-none bg-slate-950/45 transition-colors duration-300'
+        }
+      };
+
+      const chosen = wallpapers[theme] || wallpapers['dark-bloom'];
+      if ($('desktop-wallpaper-img')) $('desktop-wallpaper-img').src = chosen.src;
+      if ($('wallpaper-tint')) $('wallpaper-tint').className = chosen.tint;
+
+      ['dark-bloom', 'light-bloom', 'sql-blue'].forEach(t => {
+        const btn = $(`tile-${t}`);
+        if (!btn) return;
+        btn.className = t === theme
+          ? 'p-2.5 rounded-lg bg-sky-500 text-slate-950 font-semibold text-left transition flex flex-col justify-between h-16'
+          : 'p-2.5 rounded-lg bg-white/10 hover:bg-white/15 text-slate-100 font-medium text-left transition flex flex-col justify-between h-16';
+      });
+      showToast(`Wallpaper switched to ${theme.replace('-', ' ').toUpperCase()}`);
+    }
+
+    function cycleWallpaper() {
+      const themes = ['dark-bloom', 'light-bloom', 'sql-blue'];
+      setWallpaper(themes[(themes.indexOf(state.wallpaper) + 1) % themes.length]);
+    }
+
+    let toastTimer = null;
+    function showToast(msg) {
+      const toast = $('win-toast');
+      $('win-toast-text').textContent = msg;
+      toast.classList.remove('hidden');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toast.classList.add('hidden'), 2600);
+    }
+
+    function copyText(text, label) {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      showToast(`${label} copied: ${text}`);
+    }
+
+    // Start menu & global search
+    function renderStartMenuPinned(filter = '') {
+      const grid = $('start-pinned-grid');
+      if (!grid) return;
+      const q = filter.toLowerCase();
+      grid.innerHTML = Object.values(APPS)
+        .filter(app => app.shortTitle.toLowerCase().includes(q) || app.title.toLowerCase().includes(q))
+        .map(app => `
+          <button onclick="openApp('${app.id}'); closeAllFlyouts();" class="flex flex-col items-center justify-center p-2 rounded-lg hover:bg-white/10 transition text-center">
+            <div class="w-9 h-9 rounded-lg bg-gradient-to-br ${app.iconBg} flex items-center justify-center shadow mb-1.5">${app.iconSvg}</div>
+            <span class="text-[11px] text-slate-200 truncate w-full">${app.shortTitle}</span>
+          </button>
+        `).join('');
+    }
+
+    function openGlobalSearch() {
+      closeAllFlyouts();
+      $('win-search-overlay').classList.remove('hidden');
+      const input = $('global-search-input');
+      input.value = '';
+      runGlobalSearch('');
+      setTimeout(() => input.focus(), 40);
+    }
+
+    function runGlobalSearch(q) {
+      const term = q.toLowerCase();
+      const matches = SEARCH_INDEX.filter(item =>
+        item.title.toLowerCase().includes(term) ||
+        item.desc.toLowerCase().includes(term) ||
+        item.tag.toLowerCase().includes(term)
+      );
+      $('global-search-results').innerHTML = matches.length
+        ? matches.map(m => `
+            <button onclick="openApp('${m.app}'); closeAllFlyouts();" class="w-full flex items-center justify-between p-2.5 rounded-lg hover:bg-white/10 text-left transition">
+              <div>
+                <div class="text-xs font-semibold text-white">${m.title}</div>
+                <div class="text-[11px] text-slate-400">${m.desc}</div>
+              </div>
+              <span class="px-2 py-0.5 rounded bg-sky-500/20 text-sky-300 font-mono text-[10px] shrink-0 ml-2">${m.tag}</span>
+            </button>
+          `).join('')
+        : `<div class="p-6 text-center text-xs text-slate-400">No matching database objects or apps found.</div>`;
+    }
+
+    // Window manager
+    function openApp(appId, customPos = null) {
+      closeAllFlyouts();
+      const app = APPS[appId];
+      if (!app) return;
+
+      if (state.windows[appId]) {
+        state.windows[appId].minimized = false;
+        focusWindow(appId);
+        renderTaskbar();
+        return;
+      }
+
+      const isMobile = window.innerWidth < 768;
+      const w = isMobile ? window.innerWidth - 16 : Math.min(app.defaultW, window.innerWidth - 60);
+      const h = isMobile ? window.innerHeight - 68 : Math.min(app.defaultH, window.innerHeight - 76);
+      const offset = Object.keys(state.windows).length * 26;
+
+      state.windows[appId] = {
+        id: appId,
+        x: isMobile ? 8 : (customPos ? customPos.x : Math.min(145 + offset, window.innerWidth - w - 20)),
+        y: isMobile ? 8 : (customPos ? customPos.y : Math.min(24 + offset, window.innerHeight - h - 56)),
+        w,
+        h,
+        minimized: false,
+        maximized: isMobile
+      };
+
+      mountWindow(app);
+      focusWindow(appId);
+      renderTaskbar();
+    }
+
+    function mountWindow(app) {
+      const st = state.windows[app.id];
+      const winEl = document.createElement('div');
+      winEl.id = `win-${app.id}`;
+      winEl.className = 'win11-window fixed flex flex-col overflow-hidden pointer-events-auto text-slate-100';
+      winEl.style.left = `${st.x}px`;
+      winEl.style.top = `${st.y}px`;
+      winEl.style.width = `${st.w}px`;
+      winEl.style.height = `${st.h}px`;
+      winEl.onmousedown = () => focusWindow(app.id);
+
+      winEl.innerHTML = `
+        <div onmousedown="startDragWindow(event, '${app.id}')" ondblclick="toggleMaximizeWindow('${app.id}')" class="h-9 bg-slate-950/80 border-b border-white/10 pl-3 flex items-center justify-between shrink-0 cursor-default">
+          <div class="flex items-center gap-2 min-w-0">
+            <div class="w-4 h-4 rounded bg-gradient-to-br ${app.iconBg} flex items-center justify-center shrink-0">${app.iconSvg}</div>
+            <span class="text-xs font-medium text-slate-200 truncate">${app.title}</span>
+          </div>
+          <div class="flex items-center shrink-0" onmousedown="event.stopPropagation()">
+            <button onclick="minimizeWindow('${app.id}')" title="Minimize" class="win-caption-btn text-slate-300">
+              <svg class="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><line x1="2" y1="6" x2="10" y2="6"/></svg>
+            </button>
+            <button onclick="toggleMaximizeWindow('${app.id}')" title="Maximize / Restore" class="win-caption-btn text-slate-300">
+              <svg class="w-3 h-3" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="2.2" y="2.2" width="7.6" height="7.6" rx="1"/></svg>
+            </button>
+            <button onclick="closeWindow('${app.id}')" title="Close" class="win-caption-btn win-caption-close text-slate-300">
+              <svg class="w-3.5 h-3.5" viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.3"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+        <div class="flex-1 overflow-auto bg-slate-900/65">${renderAppContent(app.id)}</div>
+      `;
+
+      $('windows-layer').appendChild(winEl);
+      if (st.maximized) applyWindowGeometry(app.id);
+    }
+
+    function refreshWindowBody(appId) {
+      if (!state.windows[appId]) return;
+      const body = document.querySelector(`#win-${appId} > div:nth-child(2)`);
+      if (body) body.innerHTML = renderAppContent(appId);
+    }
+
+    function focusWindow(appId) {
+      state.topZ++;
+      state.activeWindow = appId;
+      Object.keys(state.windows).forEach(id => {
+        const el = $(`win-${id}`);
+        if (!el) return;
+        if (id === appId) {
+          el.style.zIndex = state.topZ;
+          el.classList.add('active-window');
+          el.classList.remove('hidden');
+        } else {
+          el.classList.remove('active-window');
+        }
+      });
+      renderTaskbar();
+    }
+
+    function minimizeWindow(appId) {
+      if (!state.windows[appId]) return;
+      state.windows[appId].minimized = true;
+      $(`win-${appId}`)?.classList.add('hidden');
+      if (state.activeWindow === appId) state.activeWindow = null;
+      renderTaskbar();
+    }
+
+    function minimizeAllWindows() {
+      Object.keys(state.windows).forEach(minimizeWindow);
+      showToast('Showing Desktop');
+    }
+
+    function toggleMaximizeWindow(appId) {
+      const st = state.windows[appId];
+      if (!st) return;
+      st.maximized = !st.maximized;
+      applyWindowGeometry(appId);
+    }
+
+    function applyWindowGeometry(appId) {
+      const st = state.windows[appId];
+      const el = $(`win-${appId}`);
+      if (!st || !el) return;
+      Object.assign(el.style, st.maximized
+        ? { left: '0px', top: '0px', width: '100vw', height: 'calc(100vh - 48px)', borderRadius: '0px' }
+        : { left: `${st.x}px`, top: `${st.y}px`, width: `${st.w}px`, height: `${st.h}px`, borderRadius: '10px' }
+      );
+    }
+
+    function closeWindow(appId) {
+      delete state.windows[appId];
+      $(`win-${appId}`)?.remove();
+      if (state.activeWindow === appId) state.activeWindow = null;
+      renderTaskbar();
+    }
+
+    function tileWindows() {
+      const openIds = Object.keys(state.windows).filter(id => !state.windows[id].minimized);
+      if (openIds.length === 0) {
+        openApp('explorer', { x: 120, y: 24 });
+        openApp('vscode', { x: 480, y: 24 });
+        return;
+      }
+      const availW = window.innerWidth - 120;
+      const availH = window.innerHeight - 64;
+      const eachW = Math.floor(availW / openIds.length) - 10;
+      openIds.forEach((id, idx) => {
+        Object.assign(state.windows[id], {
+          maximized: false,
+          x: 115 + idx * (eachW + 8),
+          y: 12,
+          w: Math.max(340, eachW),
+          h: availH
+        });
+        applyWindowGeometry(id);
+      });
+      showToast('Windows snapped side-by-side');
+    }
+
+    function resetDesktop() {
+      Object.keys(state.windows).forEach(closeWindow);
+      openApp('explorer', { x: 120, y: 20 });
+      setTimeout(() => openApp('resume', { x: 230, y: 34 }), 100);
+      showToast('Desktop workspace refreshed');
+    }
+
+    function startDragWindow(e, appId) {
+      if (e.button !== 0) return;
+      const st = state.windows[appId];
+      if (!st || st.maximized) return;
+      focusWindow(appId);
+
+      const startX = e.clientX;
+      const startY = e.clientY;
+      const origX = st.x;
+      const origY = st.y;
+      const el = $(`win-${appId}`);
+
+      const onMove = (ev) => {
+        st.x = Math.max(0, Math.min(window.innerWidth - 140, origX + (ev.clientX - startX)));
+        st.y = Math.max(0, Math.min(window.innerHeight - 84, origY + (ev.clientY - startY)));
+        el.style.left = `${st.x}px`;
+        el.style.top = `${st.y}px`;
+      };
+
+      const onUp = () => {
+        document.removeEventListener('mousemove', onMove);
+        document.removeEventListener('mouseup', onUp);
+      };
+
+      document.addEventListener('mousemove', onMove);
+      document.addEventListener('mouseup', onUp);
+    }
+
+    function renderTaskbar() {
+      const container = $('taskbar-apps');
+      if (!container) return;
+      const pinnedIds = ['explorer', 'vscode', 'resume', 'skills', 'terminal', 'contact'];
+      const allIds = Array.from(new Set([...pinnedIds, ...Object.keys(state.windows)]));
+
+      container.innerHTML = allIds.map(id => {
+        const app = APPS[id];
+        const st = state.windows[id];
+        const isOpen = Boolean(st);
+        const isActive = isOpen && !st.minimized && state.activeWindow === id;
+
+        return `
+          <button onclick="handleTaskbarClick('${id}')" title="${app.title}" class="taskbar-app-btn w-10 h-10 flex items-center justify-center ${isActive ? 'bg-white/15' : ''}">
+            <div class="w-6 h-6 rounded-md bg-gradient-to-br ${app.iconBg} flex items-center justify-center shadow">${app.iconSvg}</div>
+            ${isOpen ? `<span class="taskbar-indicator ${isActive ? 'w-4 bg-sky-400' : 'w-1.5 bg-slate-400'}"></span>` : ''}
+          </button>
+        `;
+      }).join('');
+    }
+
+    function handleTaskbarClick(appId) {
+      const st = state.windows[appId];
+      if (!st) openApp(appId);
+      else if (st.minimized) {
+        st.minimized = false;
+        focusWindow(appId);
+      } else if (state.activeWindow === appId) {
+        minimizeWindow(appId);
+      } else {
+        focusWindow(appId);
+      }
+    }
+
+    // Social links editor
+    function openLinksModal() {
+      const modal = $('social-links-modal');
+      if (!modal) {
+        openApp('resume');
+        setTimeout(openLinksModal, 80);
+        return;
+      }
+      const links = getSocialLinks();
+      $('link-github').value = links.github;
+      $('link-linkedin').value = links.linkedin;
+      $('link-portfolio').value = links.portfolio;
+      modal.classList.remove('hidden');
+    }
+
+    function closeLinksModal() {
+      $('social-links-modal')?.classList.add('hidden');
+    }
+
+    function handleSaveSocialLinks(e) {
+      e.preventDefault();
+      writeStorage(STORAGE_KEYS.links, {
+        github: $('link-github').value.trim() || DEFAULT_LINKS.github,
+        linkedin: $('link-linkedin').value.trim() || DEFAULT_LINKS.linkedin,
+        portfolio: $('link-portfolio').value.trim() || DEFAULT_LINKS.portfolio
+      });
+      closeLinksModal();
+      refreshWindowBody('resume');
+      refreshWindowBody('contact');
+      showToast('Profile links saved!');
+    }
+
+    // App content renderers
+    function renderAppContent(appId) {
+      const views = {
+        explorer: renderExplorerApp,
+        vscode: renderVSCodeApp,
+        resume: renderResumeApp,
+        skills: renderSkillsApp,
+        terminal: renderTerminalApp,
+        contact: renderContactApp,
+        recycle: renderRecycleApp
+      };
+      return views[appId] ? views[appId]() : '';
+    }
+
+    function renderExplorerApp() {
+      const projects = getProjects();
+      const navClass = (tab) => `w-full text-left px-2.5 py-1.5 rounded ${state.explorerTab === tab ? 'bg-sky-500/20 text-sky-300 font-semibold' : 'hover:bg-white/10 text-slate-300'}`;
+
+      return `
+        <div class="h-full flex flex-col text-xs relative">
+          <div class="bg-slate-950/60 border-b border-white/10 px-3 py-2 flex flex-wrap items-center justify-between gap-2">
+            <div class="flex items-center gap-2 bg-slate-950/80 border border-white/10 rounded-md px-3 py-1.5 flex-1 min-w-[200px]">
+              <span class="text-sky-400 font-semibold">This PC</span>
+              <span class="text-slate-500">&gt;</span>
+              <span class="text-slate-200">Hemavathy_R (D:)</span>
+              <span class="text-slate-500">&gt;</span>
+              <span id="explorer-breadcrumb" class="text-emerald-400 font-mono">${state.explorerTab === 'fullstack' ? 'Full_Stack_Web_Projects' : 'Enterprise_Experience_8Yrs'}</span>
+            </div>
+            <div class="flex items-center gap-1.5">
+              <button onclick="openProjectModal()" class="px-2.5 py-1.5 rounded bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold transition shadow">+ Add / Edit Project</button>
+              <button onclick="openApp('vscode')" class="px-2.5 py-1.5 rounded bg-white/10 hover:bg-white/15 border border-white/15 text-slate-200 font-medium transition">Open VS Code</button>
+            </div>
+          </div>
+
+          <div class="flex-1 flex overflow-hidden">
+            <div class="hidden sm:block w-52 bg-slate-950/45 border-r border-white/10 p-3 space-y-1 shrink-0">
+              <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-400 px-2 mb-1.5">Folders</div>
+              <button onclick="switchExplorerTab('fullstack')" id="exp-nav-fullstack" class="${navClass('fullstack')}">Full Stack Projects (${projects.length})</button>
+              <button onclick="switchExplorerTab('experience')" id="exp-nav-experience" class="${navClass('experience')}">Enterprise Experience</button>
+              <button onclick="switchExplorerTab('install')" id="exp-nav-install" class="${navClass('install')}">Deploy &amp; Install as App</button>
+
+              <div class="text-[10px] font-semibold uppercase tracking-wider text-slate-400 px-2 pt-3 mb-1.5">Quick Launch</div>
+              <button onclick="openApp('vscode')" class="w-full text-left px-2.5 py-1.5 rounded hover:bg-white/10 text-slate-300">VS_Code.exe (IDE)</button>
+              <button onclick="openApp('resume')" class="w-full text-left px-2.5 py-1.5 rounded hover:bg-white/10 text-slate-300">Resume_Hemavathy.pdf</button>
+              <button onclick="openApp('skills')" class="w-full text-left px-2.5 py-1.5 rounded hover:bg-white/10 text-slate-300">FullStack_Skills</button>
+              <button onclick="openApp('contact')" class="w-full text-left px-2.5 py-1.5 rounded hover:bg-white/10 text-slate-300">Outlook Contact</button>
+
+              <div class="pt-4 mt-4 border-t border-white/10 px-2 space-y-2">
+                <div class="text-[10px] font-semibold text-slate-400 uppercase">Engineering Edge</div>
+                <div>
+                  <div class="flex justify-between text-[10px] mb-1">
+                    <span class="text-slate-300">Full Stack Web</span>
+                    <span class="text-sky-400 font-mono">React/API</span>
+                  </div>
+                  <div class="h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="h-full bg-sky-400 w-[92%]"></div></div>
+                </div>
+                <div>
+                  <div class="flex justify-between text-[10px] mb-1">
+                    <span class="text-slate-300">DB &amp; Backend</span>
+                    <span class="text-emerald-400 font-mono">8 Yrs</span>
+                  </div>
+                  <div class="h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="h-full bg-emerald-400 w-[98%]"></div></div>
+                </div>
+              </div>
+            </div>
+
+            <div id="explorer-main-pane" class="flex-1 p-4 sm:p-5 overflow-y-auto space-y-5 selectable-text">
+              ${renderExplorerInnerBody()}
+            </div>
+          </div>
+
+          <div id="project-editor-modal" class="hidden absolute inset-0 bg-slate-950/85 backdrop-blur-md z-30 flex items-center justify-center p-4">
+            <form onsubmit="saveCustomProject(event)" class="w-full max-w-lg bg-slate-900 border border-sky-400/40 rounded-xl p-5 space-y-3 shadow-2xl">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <h3 id="proj-modal-title" class="text-sm font-bold text-white">Add / Customize Full Stack Project</h3>
+                <button type="button" onclick="closeProjectModal()" class="text-slate-400 hover:text-white px-2 py-0.5">✕</button>
+              </div>
+              <input type="hidden" id="proj-edit-id" />
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div>
+                  <label class="block text-[10px] text-slate-400 mb-1">Project Title *</label>
+                  <input required id="proj-title" type="text" placeholder="e.g., E-Commerce Analytics App" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-white focus:border-sky-400 focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-[10px] text-slate-400 mb-1">Category / Domain *</label>
+                  <input required id="proj-category" type="text" placeholder="e.g., Full Stack Web App" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-white focus:border-sky-400 focus:outline-none" />
+                </div>
+              </div>
+              <div>
+                <label class="block text-[10px] text-slate-400 mb-1">Short Tagline *</label>
+                <input required id="proj-tagline" type="text" placeholder="One-line summary of what the app solves" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-white focus:border-sky-400 focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-[10px] text-slate-400 mb-1">Architecture &amp; Key Features *</label>
+                <textarea required id="proj-desc" rows="2" placeholder="Describe frontend UI, REST APIs, database schema, and impact..." class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-white focus:border-sky-400 focus:outline-none"></textarea>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div>
+                  <label class="block text-[10px] text-slate-400 mb-1">Tech Stack (comma-separated) *</label>
+                  <input required id="proj-stack" type="text" placeholder="React, Node.js, PostgreSQL, Tailwind" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-white focus:border-sky-400 focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-[10px] text-slate-400 mb-1">Key Metric / Highlight</label>
+                  <input id="proj-metrics" type="text" placeholder="e.g., <50ms API • Full CRUD + Auth" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-white focus:border-sky-400 focus:outline-none" />
+                </div>
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <div>
+                  <label class="block text-[10px] text-slate-400 mb-1">GitHub Repo URL</label>
+                  <input id="proj-github" type="text" placeholder="https://github.com/username/repo" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-sky-300 focus:border-sky-400 focus:outline-none" />
+                </div>
+                <div>
+                  <label class="block text-[10px] text-slate-400 mb-1">Live Demo URL</label>
+                  <input id="proj-live" type="text" placeholder="https://your-app.vercel.app" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-emerald-300 focus:border-sky-400 focus:outline-none" />
+                </div>
+              </div>
+              <div class="flex items-center justify-between pt-2">
+                <button type="button" onclick="resetDefaultProjects()" class="text-[11px] text-slate-400 hover:text-rose-300">Reset Defaults</button>
+                <div class="flex gap-2">
+                  <button type="button" onclick="closeProjectModal()" class="px-3 py-1.5 rounded-lg bg-white/10 text-slate-200">Cancel</button>
+                  <button type="submit" class="px-4 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold">Save Project</button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function switchExplorerTab(tab) {
+      state.explorerTab = tab;
+      const labels = {
+        fullstack: 'Full_Stack_Web_Projects',
+        experience: 'Enterprise_Experience_8Yrs',
+        install: 'Deploy_And_Install_App'
+      };
+      if ($('explorer-breadcrumb')) $('explorer-breadcrumb').textContent = labels[tab] || tab;
+      ['fullstack', 'experience', 'install'].forEach(t => {
+        const nav = $(`exp-nav-${t}`);
+        if (nav) {
+          nav.className = `w-full text-left px-2.5 py-1.5 rounded ${tab === t ? 'bg-sky-500/20 text-sky-300 font-semibold' : 'hover:bg-white/10 text-slate-300'}`;
+        }
+      });
+      if ($('explorer-main-pane')) $('explorer-main-pane').innerHTML = renderExplorerInnerBody();
+    }
+
+    function renderExplorerInnerBody() {
+      const projects = getProjects();
+      const heroBanner = `
+        <div class="p-4 rounded-xl bg-gradient-to-r from-sky-500/15 via-indigo-600/15 to-emerald-500/15 border border-sky-400/25 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+          <div>
+            <div class="inline-flex items-center gap-1.5 px-2 py-0.5 rounded-full bg-sky-500/20 text-sky-300 font-mono text-[10px] mb-1.5">
+              <span>FULL STACK &amp; DATABASE ENGINEER • MUMBAI, INDIA</span>
+            </div>
+            <h1 class="text-lg sm:text-xl font-bold text-white">Hemavathy R</h1>
+            <p class="text-slate-300 text-xs mt-1 leading-relaxed max-w-2xl">
+              Full Stack &amp; Database Engineer combining modern web application development (<strong>JavaScript, HTML5/CSS3, Python, REST APIs</strong>) with <strong>8 years of enterprise data engineering, SQL/PL-SQL optimization, and 99.9% SLA reliability</strong>.
+            </p>
+          </div>
+          <div class="grid grid-cols-2 gap-2 shrink-0">
+            <div class="p-2.5 rounded-lg bg-slate-950/70 border border-white/10 text-center">
+              <div class="text-sm font-bold text-sky-400 font-mono">+40%</div>
+              <div class="text-[10px] text-slate-400">Query &amp; KPI Speed</div>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-950/70 border border-white/10 text-center">
+              <div class="text-sm font-bold text-emerald-400 font-mono">99.9%</div>
+              <div class="text-[10px] text-slate-400">DB SLA (50K+ Recs)</div>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-950/70 border border-white/10 text-center">
+              <div class="text-sm font-bold text-amber-400 font-mono">-60%</div>
+              <div class="text-[10px] text-slate-400">Workflow Time</div>
+            </div>
+            <div class="p-2.5 rounded-lg bg-slate-950/70 border border-white/10 text-center">
+              <div class="text-sm font-bold text-purple-400 font-mono">95%</div>
+              <div class="text-[10px] text-slate-400">24h Defect SLA</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2">
+          <button onclick="switchExplorerTab('fullstack')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition ${state.explorerTab === 'fullstack' ? 'bg-sky-500 text-slate-950' : 'bg-white/10 text-slate-300 hover:bg-white/15'}">
+            Full Stack Web Projects (${projects.length})
+          </button>
+          <button onclick="switchExplorerTab('experience')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition ${state.explorerTab === 'experience' ? 'bg-sky-500 text-slate-950' : 'bg-white/10 text-slate-300 hover:bg-white/15'}">
+            Enterprise Experience (3 Roles)
+          </button>
+          <button onclick="switchExplorerTab('install')" class="px-3 py-1.5 rounded-lg text-xs font-semibold transition ${state.explorerTab === 'install' ? 'bg-emerald-400 text-slate-950' : 'bg-white/10 text-emerald-300 hover:bg-white/15'}">
+            Deploy &amp; Install as App
+          </button>
+        </div>
+      `;
+
+      if (state.explorerTab === 'install') {
+        return `
+          ${heroBanner}
+          <div class="p-4 sm:p-5 rounded-xl bg-slate-950/75 border border-emerald-400/30 space-y-4">
+            <div class="flex flex-wrap items-center justify-between gap-2 border-b border-white/10 pb-3">
+              <div>
+                <h2 class="text-sm font-bold text-white">How to Host &amp; Install HemaOS as a Real App (.exe / PWA)</h2>
+                <p class="text-[11px] text-slate-400 mt-0.5">This portfolio already includes a Web App Manifest &amp; Service Worker so it runs standalone without browser bars.</p>
+              </div>
+              <button onclick="installAsApp()" class="px-3 py-1.5 rounded-lg bg-emerald-400 hover:bg-emerald-300 text-slate-950 font-bold text-xs transition">Trigger App Install</button>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+              <div class="p-3.5 rounded-lg bg-white/5 border border-white/10 space-y-1.5">
+                <div class="text-[10px] font-mono text-sky-400 font-bold">STEP 1 — HOST FOR FREE (2 MIN)</div>
+                <div class="font-bold text-white">Publish on Vercel / GitHub Pages</div>
+                <p class="text-[11px] text-slate-300 leading-relaxed">Save this file as <code class="text-sky-300">index.html</code> in a GitHub repo and connect it to <strong>vercel.com</strong> or <strong>netlify.com</strong> (free HTTPS URL like <code class="text-emerald-300">hemavathy.vercel.app</code>).</p>
+              </div>
+
+              <div class="p-3.5 rounded-lg bg-white/5 border border-white/10 space-y-1.5">
+                <div class="text-[10px] font-mono text-emerald-400 font-bold">STEP 2 — INSTALL ON WINDOWS / MAC</div>
+                <div class="font-bold text-white">Native Desktop Window</div>
+                <p class="text-[11px] text-slate-300 leading-relaxed">Open your live link in <strong>Chrome or Edge</strong>, click the <strong>Install icon (⊕)</strong> in the address bar (or <em>Menu → Apps → Install this site as an app</em>) to pin it to your Windows Start Menu &amp; Taskbar.</p>
+              </div>
+
+              <div class="p-3.5 rounded-lg bg-white/5 border border-white/10 space-y-1.5">
+                <div class="text-[10px] font-mono text-amber-400 font-bold">STEP 3 — MOBILE HOME SCREEN</div>
+                <div class="font-bold text-white">Android &amp; iPhone App</div>
+                <p class="text-[11px] text-slate-300 leading-relaxed">On <strong>Android Chrome</strong> tap <em>Add to Home screen / Install app</em>. On <strong>iPhone Safari</strong> tap <em>Share → Add to Home Screen</em> to launch fullscreen like a native OS.</p>
+              </div>
+            </div>
+
+            <div class="p-3 rounded-lg bg-slate-900 border border-white/10 font-mono text-[11px] text-slate-300 space-y-1">
+              <div class="text-sky-400 font-bold"># Optional: Package as a standalone Windows .exe / Android .apk using PWABuilder</div>
+              <div>1. Visit <span class="text-emerald-300">https://www.pwabuilder.com</span> and paste your deployed Vercel URL</div>
+              <div>2. Click <span class="text-amber-300">Package for Stores</span> → Download Windows MSIX / Android APK installer</div>
+            </div>
+          </div>
+        `;
+      }
+
+      if (state.explorerTab === 'fullstack') {
+        return `
+          ${heroBanner}
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            ${projects.map(p => `
+              <div class="p-4 rounded-xl bg-slate-950/70 border border-white/10 hover:border-sky-400/40 transition flex flex-col justify-between space-y-3">
+                <div class="space-y-2">
+                  <div class="flex items-start justify-between gap-2">
+                    <span class="px-2 py-0.5 rounded bg-sky-500/15 text-sky-300 font-mono text-[10px]">${p.category}</span>
+                    <div class="flex items-center gap-1">
+                      <button onclick="openProjectModal('${p.id}')" title="Edit Project" class="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[10px] text-slate-200">Edit</button>
+                      <button onclick="deleteProject('${p.id}')" title="Remove Project" class="px-1.5 py-0.5 rounded hover:bg-rose-500/20 text-[10px] text-rose-400">✕</button>
+                    </div>
+                  </div>
+                  <div>
+                    <h3 class="text-sm font-bold text-white">${p.title}</h3>
+                    <p class="text-[11px] text-emerald-400 font-medium mt-0.5">${p.tagline}</p>
+                  </div>
+                  <p class="text-[11.5px] text-slate-300 leading-relaxed">${p.description}</p>
+                </div>
+
+                <div class="space-y-2.5 pt-1">
+                  <div class="flex flex-wrap gap-1.5">
+                    ${p.stack.map(s => `<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-200 font-mono text-[10px]">${s}</span>`).join('')}
+                  </div>
+                  <div class="flex items-center justify-between pt-2 border-t border-white/10 text-[11px]">
+                    <span class="font-mono text-amber-300 text-[10px]">${p.metrics || ''}</span>
+                    <div class="flex items-center gap-2">
+                      ${p.githubUrl ? `<a href="${p.githubUrl}" target="_blank" rel="noopener" class="text-sky-400 hover:underline font-medium">GitHub &nearr;</a>` : ''}
+                      <button onclick="openApp('vscode')" class="text-emerald-400 hover:underline font-medium">Inspect Code &rarr;</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        `;
+      }
+
+      const expRoles = [
+        {
+          company: 'AssureCare HealthTech LLP',
+          role: 'Senior Configuration Engineer',
+          period: 'Nov 2022 – May 2026',
+          location: 'Bangalore, India',
+          badgeColor: 'emerald',
+          summary: 'Enterprise healthcare data engineering, query optimization, and high-availability database operations (99.9% SLA).',
+          bullets: [
+            'Designed and optimized complex SQL objects (procedures, functions, triggers, views), boosting query performance by 40% and cutting processing times by 50%.',
+            'Built automated executive KPI dashboards and governance reports, accelerating leadership decision turnaround time by 40%.',
+            'Led end-to-end SQL data validation for critical production pipelines and maintained 99.9% database stability (RPO/RTO) across servers supporting 50K+ records, resolving 95% of high-priority defects within 24 hours.',
+            'Streamlined configuration release cycles by 25% through standardized change control, index strategies, and peer code reviews.'
+          ],
+          tags: ['SQL Server', 'PostgreSQL', 'PL/SQL', 'T-SQL', 'ETL', 'Performance Tuning', 'RPO/RTO', 'KPI Dashboards']
+        },
+        {
+          company: 'Accenture Solutions Pvt. Ltd',
+          role: 'Application Development Analyst',
+          period: 'Dec 2020 – Nov 2022',
+          location: 'Bangalore, India',
+          badgeColor: 'sky',
+          summary: 'Telecom billing data platforms, financial SLA adherence, and scalable backend SQL architecture.',
+          bullets: [
+            'Engineered optimized SQL procedures, triggers, and high-availability disaster recovery workflows for large-scale telecom billing systems.',
+            'Translated 50+ complex business rules into scalable database architectures in collaboration with 8+ cross-functional Product Owners and QA engineers.',
+            'Conducted root-cause data analysis on high-impact payment discrepancies, ensuring 100% data completeness and financial SLA compliance.'
+          ],
+          tags: ['Oracle SQL', 'PL/SQL', 'High Availability', 'Disaster Recovery', 'Root-Cause Analysis', 'Agile/Scrum']
+        },
+        {
+          company: 'Accenture Solutions Pvt. Ltd',
+          role: 'Application Developer Associate',
+          period: 'Oct 2018 – Dec 2020',
+          location: 'Bangalore, India',
+          badgeColor: 'amber',
+          summary: 'Workflow automation, production deployments, and client data operations.',
+          bullets: [
+            'Automated 25+ core billing SQL workflows, reducing processing time by 60% and eliminating manual financial reporting errors.',
+            'Resolved 50+ monthly client requests at a 95% SLA rate and coordinated 15+ annual product deployments with zero critical escalations, lifting client satisfaction by 20%.'
+          ],
+          tags: ['SQL', 'Automation', 'Data Validation', 'Release Management', 'TDD']
+        }
+      ];
+
+      return `
+        ${heroBanner}
+        <div class="space-y-3.5">
+          ${expRoles.map(r => `
+            <div class="p-4 rounded-xl bg-slate-950/65 border border-white/10 space-y-2.5">
+              <div class="flex flex-wrap justify-between items-start gap-2">
+                <div>
+                  <h3 class="text-sm font-bold text-white">${r.company} — <span class="text-sky-300">${r.role}</span></h3>
+                  <p class="text-[11px] text-slate-400">${r.location}</p>
+                </div>
+                <span class="px-2.5 py-0.5 rounded bg-${r.badgeColor}-500/15 text-${r.badgeColor}-300 font-mono text-[10px]">${r.period}</span>
+              </div>
+              <p class="text-[11.5px] font-medium text-emerald-300/95">${r.summary}</p>
+              <ul class="list-disc pl-4 space-y-1 text-[11.5px] text-slate-300">
+                ${r.bullets.map(b => `<li>${b}</li>`).join('')}
+              </ul>
+              <div class="flex flex-wrap gap-1.5 pt-1">
+                ${r.tags.map(t => `<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-200 font-mono text-[10px]">${t}</span>`).join('')}
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function openProjectModal(editId = null) {
+      const modal = $('project-editor-modal');
+      if (!modal) return;
+      modal.classList.remove('hidden');
+      const existing = editId ? getProjects().find(p => p.id === editId) : null;
+
+      $('proj-modal-title').textContent = existing ? 'Edit Full Stack Project' : 'Add Your Full Stack Project';
+      $('proj-edit-id').value = existing ? existing.id : '';
+      $('proj-title').value = existing ? existing.title : '';
+      $('proj-category').value = existing ? existing.category : 'Full Stack Web Application';
+      $('proj-tagline').value = existing ? existing.tagline : '';
+      $('proj-desc').value = existing ? existing.description : '';
+      $('proj-stack').value = existing ? existing.stack.join(', ') : 'React, JavaScript, Node.js / Python, PostgreSQL';
+      $('proj-metrics').value = existing ? existing.metrics : '';
+      $('proj-github').value = existing ? existing.githubUrl : '';
+      $('proj-live').value = existing ? existing.liveUrl : '';
+    }
+
+    function closeProjectModal() {
+      $('project-editor-modal')?.classList.add('hidden');
+    }
+
+    function saveCustomProject(e) {
+      e.preventDefault();
+      const projects = getProjects();
+      const editId = $('proj-edit-id').value;
+      const entry = {
+        id: editId || `proj-${Date.now()}`,
+        title: $('proj-title').value.trim(),
+        category: $('proj-category').value.trim(),
+        tagline: $('proj-tagline').value.trim(),
+        description: $('proj-desc').value.trim(),
+        stack: $('proj-stack').value.split(',').map(s => s.trim()).filter(Boolean),
+        metrics: $('proj-metrics').value.trim(),
+        githubUrl: $('proj-github').value.trim(),
+        liveUrl: $('proj-live').value.trim()
+      };
+
+      if (editId) {
+        const idx = projects.findIndex(p => p.id === editId);
+        if (idx !== -1) projects[idx] = entry;
+      } else {
+        projects.unshift(entry);
+      }
+
+      writeStorage(STORAGE_KEYS.projects, projects);
+      closeProjectModal();
+      switchExplorerTab('fullstack');
+      showToast(`Saved project "${entry.title}"`);
+    }
+
+    function deleteProject(id) {
+      writeStorage(STORAGE_KEYS.projects, getProjects().filter(p => p.id !== id));
+      switchExplorerTab('fullstack');
+      showToast('Project removed from portfolio');
+    }
+
+    function resetDefaultProjects() {
+      writeStorage(STORAGE_KEYS.projects, DEFAULT_PROJECTS);
+      closeProjectModal();
+      switchExplorerTab('fullstack');
+      showToast('Restored default Full Stack projects');
+    }
+
+    function renderVSCodeApp() {
+      const file = VSCODE_FILES[state.vscodeFile];
+      return `
+        <div class="h-full flex flex-col text-xs bg-[#1e1e1e]">
+          <div class="bg-[#252526] border-b border-white/10 px-3 py-1.5 flex flex-wrap items-center justify-between gap-2 shrink-0">
+            <div class="flex items-center gap-1.5 overflow-x-auto">
+              ${Object.keys(VSCODE_FILES).map(fname => {
+                const f = VSCODE_FILES[fname];
+                const isAct = fname === state.vscodeFile;
+                return `
+                  <button onclick="selectVSCodeFile('${fname}')" class="px-2.5 py-1 rounded-t flex items-center gap-1.5 font-mono text-[11px] transition ${isAct ? 'bg-[#1e1e1e] text-white border-t-2 border-sky-400' : 'text-slate-400 hover:bg-white/5'}">
+                    <span class="text-[9px] font-bold text-${f.color}-400">${f.badge}</span>
+                    <span>${fname}</span>
+                  </button>
+                `;
+              }).join('')}
+            </div>
+            <button onclick="runVSCodeBuild()" class="px-3 py-1 rounded bg-emerald-500 hover:bg-emerald-400 text-slate-950 font-bold flex items-center gap-1 transition shadow">
+              <span>&#9654; Run Build / Test API</span>
+            </button>
+          </div>
+
+          <div class="flex-1 flex overflow-hidden">
+            <div class="hidden md:block w-52 bg-[#252526] border-r border-white/10 p-3 font-mono text-[11px] shrink-0 space-y-2">
+              <div class="text-[10px] font-bold uppercase tracking-wider text-slate-400">EXPLORER: FULLSTACK-APP</div>
+              <div class="space-y-1">
+                <div class="text-sky-300">&#9662; src/frontend</div>
+                <button onclick="selectVSCodeFile('App.tsx')" class="w-full text-left pl-4 py-1 rounded hover:bg-white/10 ${state.vscodeFile === 'App.tsx' ? 'bg-sky-500/20 text-white' : 'text-slate-300'}">App.tsx</button>
+                <div class="text-emerald-300 pt-1">&#9662; src/backend-api</div>
+                <button onclick="selectVSCodeFile('api_routes.py')" class="w-full text-left pl-4 py-1 rounded hover:bg-white/10 ${state.vscodeFile === 'api_routes.py' ? 'bg-sky-500/20 text-white' : 'text-slate-300'}">api_routes.py</button>
+                <div class="text-amber-300 pt-1">&#9662; database/sql</div>
+                <button onclick="selectVSCodeFile('schema_and_indexes.sql')" class="w-full text-left pl-4 py-1 rounded hover:bg-white/10 ${state.vscodeFile === 'schema_and_indexes.sql' ? 'bg-sky-500/20 text-white' : 'text-slate-300'}">schema_and_indexes.sql</button>
+                <div class="text-purple-300 pt-1">&#9662; config</div>
+                <button onclick="selectVSCodeFile('architecture.json')" class="w-full text-left pl-4 py-1 rounded hover:bg-white/10 ${state.vscodeFile === 'architecture.json' ? 'bg-sky-500/20 text-white' : 'text-slate-300'}">architecture.json</button>
+              </div>
+            </div>
+
+            <div class="flex-1 flex flex-col overflow-hidden selectable-text">
+              <div class="px-4 py-1.5 bg-[#1e1e1e] border-b border-white/10 flex items-center justify-between text-[11px] text-slate-400 font-mono">
+                <span>${state.vscodeFile} — ${file.lang}</span>
+                <button onclick="copyText(VSCODE_FILES['${state.vscodeFile}'].code, '${state.vscodeFile}')" class="text-sky-400 hover:underline">Copy Code</button>
+              </div>
+              <pre class="flex-1 p-4 overflow-auto font-mono text-[11.5px] leading-relaxed text-slate-100 bg-[#1e1e1e]"><code>${escapeHtml(file.code)}</code></pre>
+              <div id="vscode-output-panel" class="h-40 bg-[#141414] border-t border-white/15 p-3 overflow-auto font-mono text-[11px] shrink-0">
+                <div class="text-emerald-400 font-bold mb-1">${escapeHtml(file.previewTitle)}</div>
+                <pre class="text-slate-300 whitespace-pre-wrap leading-snug">${escapeHtml(file.previewOutput)}</pre>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function selectVSCodeFile(fname) {
+      state.vscodeFile = fname;
+      refreshWindowBody('vscode');
+    }
+
+    function runVSCodeBuild() {
+      const panel = $('vscode-output-panel');
+      const file = VSCODE_FILES[state.vscodeFile];
+      if (!panel || !file) return;
+      panel.innerHTML = `<div class="text-sky-400 animate-pulse">Running build &amp; integration tests for ${state.vscodeFile}...</div>`;
+      setTimeout(() => {
+        panel.innerHTML = `
+          <div class="text-emerald-400 font-bold mb-1">${escapeHtml(file.previewTitle)}</div>
+          <pre class="text-slate-300 whitespace-pre-wrap leading-snug">${escapeHtml(file.previewOutput)}</pre>
+        `;
+        showToast(`${state.vscodeFile} build & tests passed!`);
+      }, 280);
+    }
+
+    function renderResumeApp() {
+      const links = getSocialLinks();
+      return `
+        <div class="h-full flex flex-col text-xs relative">
+          <div class="bg-slate-950/85 border-b border-white/10 px-3 py-2 flex flex-wrap items-center justify-between gap-2 shrink-0">
+            <div class="flex items-center gap-2">
+              <span class="px-2 py-0.5 rounded bg-rose-500/20 text-rose-300 font-mono text-[10px] font-bold">PDF</span>
+              <span class="font-medium text-slate-200">Resume_Hemavathy_R.pdf</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <button onclick="openLinksModal()" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/15 border border-white/15 text-sky-300 font-medium transition">Edit Social Links</button>
+              <button onclick="copyText('hema12ramesh@gmail.com | (+91) 99623 82345', 'Contact Details')" class="px-2.5 py-1 rounded bg-white/10 hover:bg-white/15 text-slate-200 transition">Copy Contact</button>
+              <button onclick="window.print()" class="px-3 py-1 rounded bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold transition flex items-center gap-1.5">
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+                <span>Print / Save PDF</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="flex-1 overflow-y-auto bg-slate-800/70 p-3 sm:p-6">
+            <div id="printable-resume" class="max-w-3xl mx-auto bg-white text-slate-900 rounded-lg shadow-2xl p-6 sm:p-9 space-y-5 selectable-text">
+              <div class="border-b-2 border-slate-900 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
+                <div>
+                  <h1 class="text-2xl font-extrabold tracking-tight text-slate-950">Hemavathy R</h1>
+                  <p class="text-sm font-semibold text-blue-700">Full Stack &amp; Database Engineer</p>
+                  <div class="flex flex-wrap items-center gap-2 mt-1.5 text-[11px] font-semibold text-blue-700">
+                    <a href="${links.github}" target="_blank" rel="noopener" class="hover:underline">GitHub</a>
+                    <span class="text-slate-400">|</span>
+                    <a href="${links.linkedin}" target="_blank" rel="noopener" class="hover:underline">LinkedIn</a>
+                    <span class="text-slate-400">|</span>
+                    <a href="${links.portfolio}" target="_blank" rel="noopener" class="hover:underline">Portfolio</a>
+                  </div>
+                </div>
+                <div class="text-xs text-slate-700 sm:text-right space-y-0.5 font-medium">
+                  <div>Mumbai, India</div>
+                  <div class="text-blue-700">hema12ramesh@gmail.com</div>
+                  <div>(+91) 99623 82345</div>
+                </div>
+              </div>
+
+              <div class="space-y-4">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-blue-800 border-b border-slate-200 pb-1">Experience</h2>
+
+                <div>
+                  <div class="flex flex-wrap justify-between items-baseline">
+                    <h3 class="text-xs font-bold text-slate-950">AssureCare HealthTech LLP</h3>
+                    <span class="text-[11px] font-semibold text-slate-600">Nov 2022 – May 2026</span>
+                  </div>
+                  <div class="flex flex-wrap justify-between items-baseline mb-1">
+                    <span class="text-[11.5px] font-semibold text-blue-700">Senior Configuration Engineer</span>
+                    <span class="text-[11px] text-slate-600">Bangalore, India</span>
+                  </div>
+                  <p class="text-[11px] italic text-slate-700 mb-1.5">Enterprise healthcare data engineering, query optimization, and high-availability database operations (99.9% SLA).</p>
+                  <ul class="list-disc pl-4 space-y-1 text-[11.5px] text-slate-800 leading-snug">
+                    <li>Designed and optimized complex SQL objects (procedures, functions, triggers, views), boosting query performance by <strong>40%</strong> and cutting processing times by <strong>50%</strong>.</li>
+                    <li>Built automated executive KPI dashboards and governance reports, accelerating leadership decision turnaround time by <strong>40%</strong>.</li>
+                    <li>Led end-to-end SQL data validation for critical production pipelines and maintained <strong>99.9%</strong> database stability (RPO/RTO) across servers supporting 50K+ records, resolving <strong>95%</strong> of high-priority defects within 24 hours.</li>
+                    <li>Streamlined configuration release cycles by <strong>25%</strong> through standardized change control, index strategies, and peer code reviews.</li>
+                  </ul>
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    ${['SQL Server', 'PostgreSQL', 'PL/SQL', 'T-SQL', 'ETL', 'Performance Tuning', 'RPO/RTO', 'KPI Dashboards'].map(t => `<span class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-300 text-slate-700 font-mono text-[9.5px]">${t}</span>`).join('')}
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex flex-wrap justify-between items-baseline">
+                    <h3 class="text-xs font-bold text-slate-950">Accenture Solutions Pvt. Ltd</h3>
+                    <span class="text-[11px] font-semibold text-slate-600">Dec 2020 – Nov 2022</span>
+                  </div>
+                  <div class="flex flex-wrap justify-between items-baseline mb-1">
+                    <span class="text-[11.5px] font-semibold text-blue-700">Application Development Analyst</span>
+                    <span class="text-[11px] text-slate-600">Bangalore, India</span>
+                  </div>
+                  <p class="text-[11px] italic text-slate-700 mb-1.5">Telecom billing data platforms, financial SLA adherence, and scalable backend SQL architecture.</p>
+                  <ul class="list-disc pl-4 space-y-1 text-[11.5px] text-slate-800 leading-snug">
+                    <li>Engineered optimized SQL procedures, triggers, and high-availability disaster recovery workflows for large-scale telecom billing systems.</li>
+                    <li>Translated <strong>50+ complex business rules</strong> into scalable database architectures in collaboration with <strong>8+ cross-functional Product Owners and QA engineers</strong>.</li>
+                    <li>Conducted root-cause data analysis on high-impact payment discrepancies, ensuring <strong>100% data completeness</strong> and financial SLA compliance.</li>
+                  </ul>
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    ${['Oracle SQL', 'PL/SQL', 'High Availability', 'Disaster Recovery', 'Root-Cause Analysis', 'Agile/Scrum'].map(t => `<span class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-300 text-slate-700 font-mono text-[9.5px]">${t}</span>`).join('')}
+                  </div>
+                </div>
+
+                <div>
+                  <div class="flex flex-wrap justify-between items-baseline">
+                    <h3 class="text-xs font-bold text-slate-950">Accenture Solutions Pvt. Ltd</h3>
+                    <span class="text-[11px] font-semibold text-slate-600">Oct 2018 – Dec 2020</span>
+                  </div>
+                  <div class="flex flex-wrap justify-between items-baseline mb-1">
+                    <span class="text-[11.5px] font-semibold text-blue-700">Application Developer Associate</span>
+                    <span class="text-[11px] text-slate-600">Bangalore, India</span>
+                  </div>
+                  <p class="text-[11px] italic text-slate-700 mb-1.5">Workflow automation, production deployments, and client data operations.</p>
+                  <ul class="list-disc pl-4 space-y-1 text-[11.5px] text-slate-800 leading-snug">
+                    <li>Automated <strong>25+ core billing SQL workflows</strong>, reducing processing time by <strong>60%</strong> and eliminating manual financial reporting errors.</li>
+                    <li>Resolved <strong>50+ monthly client requests</strong> at a <strong>95% SLA rate</strong> and coordinated <strong>15+ annual product deployments</strong> with zero critical escalations, lifting client satisfaction by <strong>20%</strong>.</li>
+                  </ul>
+                  <div class="flex flex-wrap gap-1 mt-2">
+                    ${['SQL', 'Automation', 'Data Validation', 'Release Management', 'TDD'].map(t => `<span class="px-1.5 py-0.5 rounded bg-slate-100 border border-slate-300 text-slate-700 font-mono text-[9.5px]">${t}</span>`).join('')}
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <h2 class="text-xs font-bold uppercase tracking-wider text-blue-800 border-b border-slate-200 pb-1 mb-2">Skills</h2>
+                <div class="grid grid-cols-1 gap-1.5 text-xs text-slate-800">
+                  <div><strong>Languages &amp; Web:</strong> SQL, PL/SQL, T-SQL, Python, JavaScript, HTML5, CSS3, Shell Scripting, VBA, Power Query</div>
+                  <div><strong>Databases &amp; Data Engineering:</strong> Oracle DB, PostgreSQL, MS SQL Server, ETL Pipelines, Query Optimization, Data Modeling, Data Warehousing, Indexing &amp; Partitioning, RPO/RTO &amp; Disaster Recovery</div>
+                  <div><strong>Tools, Cloud &amp; Methodologies:</strong> AWS, Git, GitHub, Informatica PowerCenter, InRule DL, Power BI, Advanced Excel, Unit &amp; Integration Testing, TDD, CI/CD, Agile/Scrum</div>
+                </div>
+              </div>
+
+              <div>
+                <h2 class="text-xs font-bold uppercase tracking-wider text-blue-800 border-b border-slate-200 pb-1 mb-1.5">Education</h2>
+                <div class="flex flex-wrap justify-between items-baseline">
+                  <div class="font-bold text-slate-950">Sri Venkateswara College of Engineering (SVCE), Anna University</div>
+                  <span class="text-[11px] font-semibold text-slate-600">Jun 2014 – May 2018</span>
+                </div>
+                <div class="flex flex-wrap justify-between items-baseline text-[11px] text-slate-700 mb-1">
+                  <span class="font-semibold text-blue-700">Bachelor of Technology (B.Tech) in Information Technology</span>
+                  <span>Chennai, India</span>
+                </div>
+                <div class="text-[11px] text-slate-700">
+                  <strong>Relevant Focus Areas:</strong> Database Management Systems (DBMS) • Data Warehousing &amp; Mining • Web Technologies (HTML, CSS, JavaScript) • Software Engineering &amp; SDLC • Operating Systems &amp; Shell Scripting
+                </div>
+              </div>
+
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1 border-t border-slate-200">
+                <div>
+                  <h2 class="text-xs font-bold uppercase tracking-wider text-blue-800 mb-1.5">Certifications</h2>
+                  <ul class="list-disc pl-4 space-y-0.5 text-[11.5px] text-slate-800">
+                    <li>AWS Certified Developer – Associate — Amazon Web Services</li>
+                    <li>Agile Test-Driven Development</li>
+                    <li>PL/SQL Expertise Badge — Accenture</li>
+                    <li>Informatica PowerCenter ETL — Udemy</li>
+                    <li>Microsoft Excel Advanced Training</li>
+                  </ul>
+                </div>
+                <div>
+                  <h2 class="text-xs font-bold uppercase tracking-wider text-blue-800 mb-1.5">Internships</h2>
+                  <ul class="list-disc pl-4 space-y-1 text-[11.5px] text-slate-800">
+                    <li><strong>Data Cleaning &amp; Configuration Intern</strong> — Aatman Innovation Pvt. Ltd (2017)</li>
+                    <li><strong>Database Management Intern</strong> — HCL Infosystems Ltd (2016)</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div id="social-links-modal" class="hidden absolute inset-0 bg-slate-950/85 backdrop-blur-md z-30 flex items-center justify-center p-4">
+            <form onsubmit="handleSaveSocialLinks(event)" class="w-full max-w-md bg-slate-900 border border-sky-400/40 rounded-xl p-5 space-y-3 shadow-2xl text-slate-100">
+              <div class="flex items-center justify-between border-b border-white/10 pb-2">
+                <h3 class="text-sm font-bold text-white">Update Profile Links (GitHub | LinkedIn | Portfolio)</h3>
+                <button type="button" onclick="closeLinksModal()" class="text-slate-400 hover:text-white px-2">✕</button>
+              </div>
+              <div>
+                <label class="block text-[10px] text-slate-400 mb-1">GitHub URL</label>
+                <input id="link-github" type="url" placeholder="https://github.com/yourusername" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-sky-300 focus:border-sky-400 focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-[10px] text-slate-400 mb-1">LinkedIn URL</label>
+                <input id="link-linkedin" type="url" placeholder="https://linkedin.com/in/yourusername" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-sky-300 focus:border-sky-400 focus:outline-none" />
+              </div>
+              <div>
+                <label class="block text-[10px] text-slate-400 mb-1">Portfolio URL</label>
+                <input id="link-portfolio" type="url" placeholder="https://yourportfolio.vercel.app" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-emerald-300 focus:border-sky-400 focus:outline-none" />
+              </div>
+              <div class="flex justify-end gap-2 pt-2">
+                <button type="button" onclick="closeLinksModal()" class="px-3 py-1.5 rounded-lg bg-white/10 text-slate-200">Cancel</button>
+                <button type="submit" class="px-4 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold">Save Links</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderSkillsApp() {
+      const skillCategories = [
+        {
+          category: 'Languages & Web',
+          color: 'sky',
+          pills: ['SQL', 'PL/SQL', 'T-SQL', 'Python', 'JavaScript', 'HTML5', 'CSS3', 'Shell Scripting', 'VBA', 'Power Query']
+        },
+        {
+          category: 'Databases & Data Engineering',
+          color: 'emerald',
+          pills: ['Oracle DB', 'PostgreSQL', 'MS SQL Server', 'ETL Pipelines', 'Query Optimization', 'Data Modeling', 'Data Warehousing', 'Indexing & Partitioning', 'RPO/RTO & Disaster Recovery']
+        },
+        {
+          category: 'Tools, Cloud & Methodologies',
+          color: 'amber',
+          pills: ['AWS', 'Git', 'GitHub', 'Informatica PowerCenter', 'InRule DL', 'Power BI', 'Advanced Excel', 'Unit & Integration Testing', 'TDD', 'CI/CD', 'Agile/Scrum']
+        }
+      ];
+
+      return `
+        <div class="p-4 sm:p-5 space-y-5 text-xs selectable-text">
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+            <div class="p-3 rounded-xl bg-slate-950/75 border border-sky-400/25">
+              <div class="text-[10px] font-mono text-slate-400">ROLE PROFILE</div>
+              <div class="text-sm font-extrabold text-sky-400 mt-0.5">Full Stack &amp; DB</div>
+              <div class="text-[10px] text-slate-300">Mumbai, India</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950/75 border border-emerald-400/25">
+              <div class="text-[10px] font-mono text-slate-400">QUERY &amp; KPI GAIN</div>
+              <div class="text-sm font-extrabold text-emerald-400 mt-0.5">+40% / -50%</div>
+              <div class="text-[10px] text-slate-300">Speed / Processing</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950/75 border border-amber-400/25">
+              <div class="text-[10px] font-mono text-slate-400">WORKFLOW GAIN</div>
+              <div class="text-sm font-extrabold text-amber-400 mt-0.5">-60% Time</div>
+              <div class="text-[10px] text-slate-300">25+ Automated Flows</div>
+            </div>
+            <div class="p-3 rounded-xl bg-slate-950/75 border border-purple-400/25">
+              <div class="text-[10px] font-mono text-slate-400">PRODUCTION SLA</div>
+              <div class="text-sm font-extrabold text-purple-400 mt-0.5">99.9% Uptime</div>
+              <div class="text-[10px] text-slate-300">RPO/RTO • 50K+ Recs</div>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+            ${skillCategories.map(grp => `
+              <div class="p-4 rounded-xl bg-slate-950/65 border border-white/10 space-y-3">
+                <h3 class="font-bold text-${grp.color}-400 text-xs border-b border-white/10 pb-2">${grp.category}</h3>
+                <div class="flex flex-wrap gap-1.5">
+                  ${grp.pills.map(p => `<span class="px-2.5 py-1 rounded-md bg-${grp.color}-500/10 border border-${grp.color}-500/25 text-slate-100 font-medium text-[11px]">${p}</span>`).join('')}
+                </div>
+              </div>
+            `).join('')}
+          </div>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
+            <div class="p-4 rounded-xl bg-slate-950/65 border border-white/10 space-y-2">
+              <div class="flex items-center justify-between">
+                <span class="font-bold text-sky-400 uppercase text-[10px] tracking-wider">Education</span>
+                <span class="font-mono text-[10px] text-slate-400">Jun 2014 – May 2018</span>
+              </div>
+              <div class="font-bold text-white text-xs">Sri Venkateswara College of Engineering (SVCE), Anna University</div>
+              <div class="text-emerald-400 font-medium text-[11px]">Bachelor of Technology (B.Tech) in Information Technology • Chennai, India</div>
+              <div class="flex flex-wrap gap-1 pt-1">
+                ${['DBMS', 'Data Warehousing & Mining', 'Web Technologies (HTML, CSS, JS)', 'Software Engineering & SDLC', 'OS & Shell Scripting'].map(f => `<span class="px-2 py-0.5 rounded bg-white/5 border border-white/10 text-slate-300 text-[10px]">${f}</span>`).join('')}
+              </div>
+            </div>
+
+            <div class="p-4 rounded-xl bg-slate-950/65 border border-white/10 space-y-2.5">
+              <div class="font-bold text-amber-400 uppercase text-[10px] tracking-wider">Internships &amp; Certifications</div>
+              <div class="space-y-1 text-[11px] text-slate-200">
+                <div>• <strong>Data Cleaning &amp; Configuration Intern</strong> — Aatman Innovation Pvt. Ltd (2017)</div>
+                <div>• <strong>Database Management Intern</strong> — HCL Infosystems Ltd (2016)</div>
+              </div>
+              <div class="flex flex-wrap gap-1.5 pt-1 border-t border-white/10">
+                <span class="px-2 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[10px]">AWS Certified Developer – Associate</span>
+                <span class="px-2 py-0.5 rounded bg-rose-500/15 border border-rose-500/30 text-rose-300 text-[10px]">Agile Test-Driven Development</span>
+                <span class="px-2 py-0.5 rounded bg-sky-500/15 border border-sky-500/30 text-sky-300 text-[10px]">PL/SQL Expertise Badge (Accenture)</span>
+                <span class="px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px]">Informatica PowerCenter ETL</span>
+                <span class="px-2 py-0.5 rounded bg-purple-500/15 border border-purple-500/30 text-purple-300 text-[10px]">MS Excel Advanced Training</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderTerminalApp() {
+      return `
+        <div onclick="$('win-term-input')?.focus()" class="h-full bg-[#0c0c0c] font-mono text-xs p-4 flex flex-col justify-between text-slate-200 selectable-text">
+          <div id="win-term-output" class="space-y-2 overflow-y-auto flex-1 pb-2">
+            <div class="text-sky-400">Windows PowerShell — HemaOS Full Stack &amp; Database Engineer CLI [v11.0]</div>
+            <div class="text-slate-400">Profile: Hemavathy R | Mumbai, India | hema12ramesh@gmail.com</div>
+            <div class="text-emerald-400">Type <span class="text-amber-300 font-bold">help</span> or click a quick command below:</div>
+            <div class="flex flex-wrap gap-1.5 pt-1">
+              <button onclick="runTerminalCmd('whoami')" class="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[11px] text-sky-300">whoami</button>
+              <button onclick="runTerminalCmd('experience')" class="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[11px] text-emerald-300">experience</button>
+              <button onclick="runTerminalCmd('skills')" class="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[11px] text-amber-300">skills</button>
+              <button onclick="runTerminalCmd('education')" class="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[11px] text-purple-300">education</button>
+              <button onclick="runTerminalCmd('certifications')" class="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[11px] text-rose-300">certifications</button>
+            </div>
+          </div>
+          <form onsubmit="handleTerminalSubmit(event)" class="flex items-center gap-2 pt-2 border-t border-white/15 shrink-0">
+            <span class="text-emerald-400 font-bold">PS C:\\Users\\Hemavathy&gt;</span>
+            <input id="win-term-input" type="text" autocomplete="off" placeholder="Enter command (whoami, experience, skills, education, internships)..." class="flex-1 bg-transparent text-white focus:outline-none" />
+          </form>
+        </div>
+      `;
+    }
+
+    function handleTerminalSubmit(e) {
+      e.preventDefault();
+      const input = $('win-term-input');
+      const cmd = input.value.trim();
+      if (!cmd) return;
+      input.value = '';
+      runTerminalCmd(cmd);
+    }
+
+    function runTerminalCmd(cmd) {
+      const out = $('win-term-output');
+      if (!out) return;
+      const lower = cmd.toLowerCase();
+
+      if (lower === 'cls' || lower === 'clear') {
+        out.innerHTML = '';
+        return;
+      }
+
+      const links = getSocialLinks();
+      const commands = {
+        help: `Available Commands:
+  whoami         - Full Stack & Database Engineer summary & contact info
+  experience     - AssureCare HealthTech LLP & Accenture Solutions roles
+  skills         - Categorized Languages & Web, Databases, Tools & Cloud
+  education      - B.Tech IT from SVCE, Anna University (2014–2018)
+  certifications - AWS Developer Associate, Agile TDD, PL/SQL & ETL credentials
+  internships    - Aatman Innovation (2017) & HCL Infosystems (2016)
+  projects       - List Full Stack web applications in portfolio
+  contact        - Print Email, Phone & Social Links
+  cls / clear    - Clear terminal screen`,
+        whoami: `Hemavathy R | Full Stack & Database Engineer
+Location : Mumbai, India
+Email    : hema12ramesh@gmail.com
+Phone    : (+91) 99623 82345
+Summary  : Full Stack & Database Engineer with 8 years in enterprise healthcare & telecom data platforms, SQL/PL-SQL tuning (+40%), workflow automation (-60%), and 99.9% SLA reliability.`,
+        skills: `[Languages & Web]
+  SQL, PL/SQL, T-SQL, Python, JavaScript, HTML5, CSS3, Shell Scripting, VBA, Power Query
+[Databases & Data Engineering]
+  Oracle DB, PostgreSQL, MS SQL Server, ETL Pipelines, Query Optimization, Data Modeling, Data Warehousing, Indexing & Partitioning, RPO/RTO & Disaster Recovery
+[Tools, Cloud & Methodologies]
+  AWS, Git, GitHub, Informatica PowerCenter, InRule DL, Power BI, Advanced Excel, Unit & Integration Testing, TDD, CI/CD, Agile/Scrum`,
+        education: `Sri Venkateswara College of Engineering (SVCE), Anna University — Chennai, India
+Degree : Bachelor of Technology (B.Tech) in Information Technology (Jun 2014 – May 2018)
+Focus  : DBMS, Data Warehousing & Mining, Web Technologies (HTML, CSS, JS), Software Engineering & SDLC, OS & Shell Scripting`,
+        internships: `* Data Cleaning & Configuration Intern — Aatman Innovation Pvt. Ltd (2017)
+- Database Management Intern — HCL Infosystems Ltd (2016)`,
+        projects: getProjects()
+          .map((p, i) => `[${i + 1}] ${p.title} (${p.category})\n    Stack: ${p.stack.join(', ')}\n    Impact: ${p.metrics || p.tagline}`)
+          .join('\n'),
+        experience: `[1] AssureCare HealthTech LLP | Senior Configuration Engineer (Nov 2022 – May 2026 | Bangalore)
+    -> Boosted query perf +40%, cut processing -50%, KPI dashboards (+40% decision speed), 99.9% SLA on 50K+ records
+[2] Accenture Solutions Pvt. Ltd | Application Development Analyst (Dec 2020 – Nov 2022 | Bangalore)
+    -> Telecom billing SQL procedures, HA/DR workflows, 50+ business rules across 8+ teams, 100% data completeness
+[3] Accenture Solutions Pvt. Ltd | Application Developer Associate (Oct 2018 – Dec 2020 | Bangalore)
+    -> Automated 25+ billing SQL workflows (-60% time), 95% SLA on 50+ monthly requests, 15+ annual deployments`,
+        certifications: `* AWS Certified Developer – Associate — Amazon Web Services
+- Agile Test-Driven Development
+- PL/SQL Expertise Badge
+- Informatica PowerCenter ETL
+- Microsoft Excel Advanced Training`,
+        contact: `Email     : hema12ramesh@gmail.com
+Phone     : (+91) 99623 82345
+Location  : Mumbai, India
+GitHub    : ${links.github}
+LinkedIn  : ${links.linkedin}
+Portfolio : ${links.portfolio}`
+      };
+
+      commands.stack = commands.skills;
+      const response = commands[lower] || `'${cmd}' is not recognized. Type 'help' to see available commands.`;
+
+      out.innerHTML += `
+        <div class="pt-1">
+          <div class="text-emerald-400">PS C:\\Users\\Hemavathy&gt; <span class="text-white">${escapeHtml(cmd)}</span></div>
+          <pre class="whitespace-pre-wrap text-slate-300 mt-1 leading-relaxed">${escapeHtml(response)}</pre>
+        </div>
+      `;
+      out.scrollTop = out.scrollHeight;
+    }
+
+    function renderContactApp() {
+      const links = getSocialLinks();
+      return `
+        <div class="h-full flex flex-col text-xs selectable-text">
+          <div class="bg-blue-600/20 border-b border-white/10 p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+            <div class="flex items-center gap-3">
+              <div class="w-11 h-11 rounded-full bg-gradient-to-br from-blue-500 to-indigo-600 flex items-center justify-center font-bold text-sm text-white shadow">HR</div>
+              <div>
+                <h2 class="text-sm font-bold text-white">Hemavathy R</h2>
+                <p class="text-slate-300">Full Stack &amp; Database Engineer • Mumbai, India</p>
+              </div>
+            </div>
+            <div class="flex flex-wrap gap-1.5">
+              <button onclick="openLinksModal()" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 border border-white/15 text-sky-300 font-medium transition">Edit Links</button>
+              <button onclick="copyText('hema12ramesh@gmail.com', 'Email')" class="px-2.5 py-1.5 rounded-lg bg-sky-500 hover:bg-sky-400 text-slate-950 font-semibold transition">Copy Email</button>
+              <button onclick="copyText('(+91) 99623 82345', 'Phone')" class="px-2.5 py-1.5 rounded-lg bg-white/10 hover:bg-white/15 text-white font-medium transition">Copy Phone</button>
+            </div>
+          </div>
+
+          <div class="p-4 sm:p-5 space-y-4 flex-1 overflow-y-auto">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-2.5">
+              <div class="p-3 rounded-lg bg-slate-950/70 border border-white/10">
+                <div class="text-[10px] text-slate-400 font-mono">DIRECT EMAIL</div>
+                <div class="text-sky-300 font-medium mt-0.5">hema12ramesh@gmail.com</div>
+              </div>
+              <div class="p-3 rounded-lg bg-slate-950/70 border border-white/10">
+                <div class="text-[10px] text-slate-400 font-mono">PHONE / WHATSAPP</div>
+                <div class="text-emerald-300 font-medium mt-0.5">(+91) 99623 82345</div>
+              </div>
+              <div class="p-3 rounded-lg bg-slate-950/70 border border-white/10">
+                <div class="text-[10px] text-slate-400 font-mono">PROFILES</div>
+                <div class="flex items-center gap-2 mt-0.5 text-sky-300 font-medium">
+                  <a href="${links.github}" target="_blank" rel="noopener" class="hover:underline">GitHub</a>
+                  <span class="text-slate-600">|</span>
+                  <a href="${links.linkedin}" target="_blank" rel="noopener" class="hover:underline">LinkedIn</a>
+                  <span class="text-slate-600">|</span>
+                  <a href="${links.portfolio}" target="_blank" rel="noopener" class="hover:underline">Portfolio</a>
+                </div>
+              </div>
+            </div>
+
+            <form onsubmit="sendOutlookMessage(event)" class="space-y-3 bg-slate-950/50 p-4 rounded-xl border border-white/10">
+              <div class="font-semibold text-white">Send Direct Message / Interview Invite</div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
+                <input required type="text" placeholder="Your Name / Company" class="bg-slate-900 border border-white/15 rounded-lg px-3 py-2 text-white placeholder-slate-400 focus:border-sky-400 focus:outline-none" />
+                <input required type="email" placeholder="Your Work Email" class="bg-slate-900 border border-white/15 rounded-lg px-3 py-2 text-white placeholder-slate-400 focus:border-sky-400 focus:outline-none" />
+              </div>
+              <input required type="text" value="Opportunity: Full Stack & Database Engineer Role" class="w-full bg-slate-900 border border-white/15 rounded-lg px-3 py-2 text-sky-200 focus:border-sky-400 focus:outline-none" />
+              <textarea required rows="3" placeholder="Hi Hemavathy, we reviewed your HemaOS Windows 11 portfolio and would love to discuss..." class="w-full bg-slate-900 border border-white/15 rounded-lg px-3 py-2 text-white placeholder-slate-400 focus:border-sky-400 focus:outline-none"></textarea>
+              <div class="flex items-center justify-between">
+                <a href="mailto:hema12ramesh@gmail.com?subject=Full%20Stack%20%26%20Database%20Engineer%20Opportunity" class="text-sky-400 hover:underline text-[11px]">Or launch default Mail client &rarr;</a>
+                <button type="submit" class="px-4 py-2 rounded-lg bg-blue-600 hover:bg-blue-500 text-white font-semibold transition">Send Message</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      `;
+    }
+
+    function sendOutlookMessage(e) {
+      e.preventDefault();
+      showToast('Message queued for Hemavathy R (hema12ramesh@gmail.com)!');
+      e.target.reset();
+    }
+
+    function renderRecycleApp() {
+      const items = [
+        { name: 'Manual_CSV_Billing_Workflows.xlsx', size: '-60% Processing Time', origin: 'Accenture Billing Automation', reason: 'Replaced by 25+ core automated billing SQL workflows, eliminating manual financial reporting errors.' },
+        { name: 'Unindexed_Full_Table_Scans.sql', size: '+40% Query Speedup', origin: 'AssureCare HealthTech LLP', reason: 'Eliminated via optimized SQL objects & index strategies, cutting processing times by 50%.' },
+        { name: 'Static_Manual_KPI_Spreadsheets.xls', size: '+40% Decision Speed', origin: 'Executive Governance Portal', reason: 'Replaced with automated executive KPI dashboards and governance reports.' },
+        { name: 'Payment_Reconciliation_Gaps.log', size: '100% Data Completeness', origin: 'Accenture Telecom Billing', reason: 'Resolved via root-cause data analysis and scalable business rule architectures.' }
+      ];
+
+      return `
+        <div class="p-4 sm:p-5 space-y-4 text-xs selectable-text">
+          <div class="flex items-center justify-between bg-slate-950/70 border border-white/10 p-3 rounded-xl">
+            <div>
+              <h3 class="font-bold text-white">Eliminated Bottlenecks &amp; Legacy Anti-Patterns</h3>
+              <p class="text-slate-400 text-[11px]">Items permanently purged during Full Stack &amp; Database Engineering roles</p>
+            </div>
+            <button onclick="showToast('All legacy bottlenecks remain permanently purged!')" class="px-3 py-1.5 rounded-lg bg-rose-500/20 hover:bg-rose-500/30 border border-rose-500/30 text-rose-300 font-medium transition">Purge Forever</button>
+          </div>
+
+          <div class="space-y-2">
+            ${items.map(it => `
+              <div class="p-3 rounded-xl bg-slate-950/60 border border-white/10 flex flex-col sm:flex-row sm:items-center justify-between gap-2">
+                <div>
+                  <div class="font-mono font-bold text-amber-300">${it.name}</div>
+                  <div class="text-slate-300 mt-0.5">${it.reason}</div>
+                </div>
+                <div class="sm:text-right shrink-0">
+                  <span class="px-2 py-0.5 rounded bg-emerald-500/15 text-emerald-300 font-mono text-[10px]">${it.size}</span>
+                  <div class="text-[10px] text-slate-400 mt-1">${it.origin}</div>
+                </div>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      `;
+    }
+  </script>
+</body>
+</html>
