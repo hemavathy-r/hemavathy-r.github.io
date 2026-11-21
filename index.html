@@ -7,7 +7,7 @@
   <meta name="apple-mobile-web-app-capable" content="yes" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
   <meta name="apple-mobile-web-app-title" content="HemaOS Portfolio" />
-  <title>Hemavathy R — Software Engineer | Portfolio</title>
+  <title>Hemavathy R — Full Stack &amp; Database Engineer | Portfolio</title>
 
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -46,9 +46,7 @@
       transition: background 0.4s ease, color 0.25s ease;
     }
 
-    /* Animated Image Wallpaper */
     :root {
-      /* Replace this URL with any animated GIF, WebP, or high-res wallpaper image */
       --wallpaper-url: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80');
     }
 
@@ -223,7 +221,7 @@
 </head>
 <body class="theme-dark-bloom flex flex-col justify-between relative select-none" oncontextmenu="showContextMenu(event)">
 
-  <!-- Full-Screen Animated Background Image (Swap src with your .gif / .webp / image URL) -->
+  <!-- Full-Screen Animated Background Image -->
   <img
     id="desktop-wallpaper-img"
     src="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1920&q=80"
@@ -317,7 +315,7 @@
       <div class="pt-1">
         <div class="flex items-center justify-between mb-2 px-1">
           <span class="text-xs font-semibold text-slate-200">Recommended</span>
-          <span class="text-[10px] font-mono text-sky-400">FULL STACK + 8 YRS DB</span>
+          <span class="text-[10px] font-mono text-sky-400">FULL STACK + 8+ YRS DB</span>
         </div>
         <div class="grid grid-cols-1 sm:grid-cols-2 gap-1.5">
           <button onclick="openApp('vscode'); closeAllFlyouts();" class="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white/10 text-left transition">
@@ -331,21 +329,21 @@
             <div class="w-8 h-8 rounded bg-emerald-500/20 border border-emerald-500/30 flex items-center justify-center text-emerald-400 font-bold text-[10px]">APP</div>
             <div class="min-w-0">
               <div class="text-xs font-medium text-slate-100 truncate">Full_Stack_Projects/</div>
-              <div class="text-[10px] text-slate-400">Web Apps &amp; Editable Portfolio Slots</div>
+              <div class="text-[10px] text-slate-400">PokeHub &amp; HemaOS Interactive Desktop</div>
             </div>
           </button>
           <button onclick="openApp('resume'); closeAllFlyouts();" class="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white/10 text-left transition">
             <div class="w-8 h-8 rounded bg-rose-500/20 border border-rose-500/30 flex items-center justify-center text-rose-400 font-bold text-[10px]">PDF</div>
             <div class="min-w-0">
               <div class="text-xs font-medium text-slate-100 truncate">Resume_Hemavathy_R.pdf</div>
-              <div class="text-[10px] text-slate-400">Full Stack Dev • 8 Yrs Data Eng</div>
+              <div class="text-[10px] text-slate-400">Full Stack &amp; Database Engineer</div>
             </div>
           </button>
           <button onclick="openApp('skills'); closeAllFlyouts();" class="flex items-center gap-2.5 p-2 rounded-lg hover:bg-white/10 text-left transition">
             <div class="w-8 h-8 rounded bg-amber-500/20 border border-amber-500/30 flex items-center justify-center text-amber-400 font-bold text-[10px]">DEV</div>
             <div class="min-w-0">
               <div class="text-xs font-medium text-slate-100 truncate">FullStack_Skills.perfmon</div>
-              <div class="text-[10px] text-slate-400">JS/React, Python/Node, SQL, AWS</div>
+              <div class="text-[10px] text-slate-400">JS, Tailwind, SQL, Python, AWS</div>
             </div>
           </button>
         </div>
@@ -357,7 +355,7 @@
         <div class="w-8 h-8 rounded-full bg-gradient-to-tr from-sky-500 to-indigo-600 flex items-center justify-center font-bold text-xs text-white shadow">HR</div>
         <div class="text-left">
           <div class="text-xs font-semibold text-white">Hemavathy R</div>
-          <div class="text-[10px] text-slate-400">Software Engineer • Mumbai</div>
+          <div class="text-[10px] text-slate-400">Full Stack &amp; Database Engineer • Mumbai</div>
         </div>
       </button>
       <div class="flex items-center gap-1">
@@ -382,7 +380,7 @@
         <svg class="w-5 h-5 text-sky-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-4.35-4.35M17 11a6 6 0 11-12 0 6 6 0 0112 0z" />
         </svg>
-        <input id="global-search-input" type="text" oninput="runGlobalSearch(this.value)" placeholder="Search Full Stack apps, VS Code files, React/Python/SQL skills, or resume..." class="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none" />
+        <input id="global-search-input" type="text" oninput="runGlobalSearch(this.value)" placeholder="Search Full Stack apps (PokeHub, HemaOS), VS Code files, SQL/Python skills, or resume..." class="w-full bg-transparent text-sm text-white placeholder-slate-400 focus:outline-none" />
         <button onclick="closeAllFlyouts()" class="px-2 py-0.5 rounded bg-white/10 text-[10px] font-mono text-slate-300">ESC</button>
       </div>
       <div id="global-search-results" class="max-h-80 overflow-y-auto p-3 space-y-1.5"></div>
@@ -426,7 +424,7 @@
     <div class="pt-2 border-t border-white/10 space-y-2.5 text-xs">
       <div>
         <div class="flex justify-between text-[11px] mb-1">
-          <span class="text-slate-300">Full Stack Transition (React, JS, Python/Node, REST)</span>
+          <span class="text-slate-300">Full Stack Web (JS, HTML5, Tailwind, REST API)</span>
           <span class="font-mono text-sky-400 font-semibold">ACTIVE BUILDER</span>
         </div>
         <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
@@ -435,7 +433,7 @@
       </div>
       <div>
         <div class="flex justify-between text-[11px] mb-1">
-          <span class="text-slate-300">Backend &amp; DB Architecture (8 Yrs • 99.9% SLA)</span>
+          <span class="text-slate-300">Backend &amp; DB Architecture (8+ Yrs • 99.9% SLA)</span>
           <span class="font-mono text-emerald-400 font-semibold">PRODUCTION PROVEN</span>
         </div>
         <div class="w-full h-1.5 bg-slate-800 rounded-full overflow-hidden">
@@ -457,7 +455,7 @@
           <span>FULL STACK PORTFOLIO</span>
           <span>OPEN TO ROLES</span>
         </div>
-        <p class="text-slate-200 font-medium">Seeking Full Stack Developer roles combining React/JS/Python APIs with 8 yrs DB architecture.</p>
+        <p class="text-slate-200 font-medium">Seeking Full Stack &amp; Database Engineer roles combining JS/Tailwind/REST APIs with 8+ yrs DB architecture.</p>
       </div>
       <div class="p-2.5 rounded-lg bg-white/5 border border-white/10">
         <div class="flex justify-between text-[10px] text-emerald-400 font-mono mb-0.5">
@@ -468,15 +466,15 @@
       </div>
       <div class="p-2.5 rounded-lg bg-white/5 border border-white/10">
         <div class="flex justify-between text-[10px] text-amber-400 font-mono mb-0.5">
-          <span>CUSTOMIZE YOUR PROJECTS</span>
-          <span>THIS PC &gt; + ADD</span>
+          <span>FEATURED PROJECTS</span>
+          <span>POKEHUB &amp; HEMAOS</span>
         </div>
-        <p class="text-slate-200 font-medium">Click "+ Add / Edit Project" inside This PC to plug in your GitHub &amp; live full stack app links.</p>
+        <p class="text-slate-200 font-medium">Explore PokeHub &amp; HemaOS in This PC or click "+ Add / Edit Project" to add more apps.</p>
       </div>
     </div>
     <div class="pt-2 border-t border-white/10 text-center">
-      <div id="calendar-full-date" class="text-xs font-semibold text-sky-300">Thursday, November 19, 2026</div>
-      <div class="text-[10px] text-slate-400 mt-0.5">Full Stack Developer • Mumbai / Remote Ready</div>
+      <div id="calendar-full-date" class="text-xs font-semibold text-sky-300">Saturday, November 21, 2026</div>
+      <div class="text-[10px] text-slate-400 mt-0.5">Full Stack &amp; Database Engineer • Mumbai / Remote Ready</div>
     </div>
   </div>
 
@@ -523,7 +521,7 @@
       </div>
       <div class="leading-tight">
         <div class="text-[11px] font-semibold">Full Stack &amp; DB</div>
-        <div class="text-[10px] text-emerald-400 font-mono">99.9% SLA • 8 Yrs</div>
+        <div class="text-[10px] text-emerald-400 font-mono">99.9% SLA • 8+ Yrs</div>
       </div>
     </button>
 
@@ -581,8 +579,8 @@
       </button>
 
       <button onclick="toggleFlyout('notification-flyout', event)" title="Notifications & Calendar" class="px-2 py-1 rounded-md hover:bg-white/10 transition text-right leading-tight">
-        <div id="tray-time" class="text-[11px] font-medium">11:09 PM</div>
-        <div id="tray-date" class="text-[10px] opacity-80">11/19/2026</div>
+        <div id="tray-time" class="text-[11px] font-medium">11:30 AM</div>
+        <div id="tray-date" class="text-[10px] opacity-80">11/21/2026</div>
       </button>
 
       <button onclick="minimizeAllWindows()" title="Show Desktop" class="w-2 h-8 ml-1 border-l border-white/20 hover:bg-white/20 transition"></button>
@@ -648,38 +646,38 @@
     };
 
     const STORAGE_KEYS = {
-      links: 'hemaos_social_links_v1',
-      projects: 'hemaos_fullstack_projects_v1'
+      links: 'hemaos_social_links_v2',
+      projects: 'hemaos_fullstack_projects_v2'
     };
 
     const DEFAULT_LINKS = {
-      github: 'https://github.com/hemavathy-r?tab=repositories',
+      github: 'https://github.com/hemavathy-r',
       linkedin: 'https://www.linkedin.com/in/hemavathy-ramesh-babu-41942a141/',
-      portfolio: 'https://hemaos-portfolio.vercel.app'
+      portfolio: 'https://hemavathy-r.github.io/'
     };
 
     const DEFAULT_PROJECTS = [
       {
-        id: 'proj-1',
-        title: 'HemaOS — Windows 11 Interactive Developer Desktop',
-        category: 'Frontend UI & Systems Engineering',
-        tagline: 'Browser-based OS window manager, VS Code IDE simulator & CLI shell',
-        description: 'Custom-built responsive Windows 11 desktop environment featuring multi-window z-index management, drag-and-drop framing, local storage project CRUD, interactive IDE previewer, and PowerShell CLI.',
-        stack: ['JavaScript', 'Tailwind CSS', 'HTML5', 'LocalStorage API', 'Responsive UI'],
-        metrics: 'Zero-Dependency Window Engine • 100% Responsive',
-        githubUrl: 'https://github.com/',
-        liveUrl: '#preview-hemaos'
-      },
-      { 
-	id: 'proj-2',
+        id: 'proj-pokehub',
         title: 'PokeHub — Full-Stack Pokedex & Trainer Squad Manager',
         category: 'Full-Stack Web & Database Engineering',
         tagline: 'API-driven Pokedex explorer, stat visualizer & SQL-persisted team builder',
-        description: 'Full-stack web application integrating PokeAPI with a relational SQL backend for user authentication, custom squad persistence, and battle-stat analytics. Features multi-criteria indexing, type-effectiveness matrices, and normalized schema storage for trainer rosters.',
-        stack: ['JavaScript', 'HTML5', 'Tailwind CSS', 'REST API (PokeAPI)', 'SQL Database', 'Backend API'],
+        description: 'Built a full-stack web application integrating PokeAPI with a relational SQL backend for user authentication, custom squad persistence, and battle-stat analytics across 1,000+ indexed species. Implemented multi-criteria indexing, type-effectiveness matrices, and normalized relational schema storage for trainer rosters.',
+        stack: ['JavaScript', 'HTML5', 'Tailwind CSS', 'REST API', 'SQL'],
         metrics: 'Relational Squad Persistence • 1,000+ Indexed Species',
-        githubUrl: 'https://github.com/',
+        githubUrl: 'https://github.com/hemavathy-r/pokehub',
         liveUrl: '#preview-pokehub'
+      },
+      {
+        id: 'proj-hemaos',
+        title: 'HemaOS — Windows 11 Interactive Developer Desktop',
+        category: 'Frontend UI & Systems Engineering',
+        tagline: 'Zero-dependency Windows 11 browser-based desktop environment',
+        description: 'Engineered a zero-dependency, 100% responsive Windows 11 browser-based desktop environment featuring multi-window z-index management, drag-and-drop framing, VS Code IDE previewer, and PowerShell CLI simulator. Developed local storage project CRUD operations and interactive system workflows.',
+        stack: ['JavaScript', 'HTML5', 'Tailwind CSS', 'LocalStorage API'],
+        metrics: 'Zero-Dependency Window Engine • 100% Responsive',
+        githubUrl: 'https://github.com/hemavathy-r/hemaos',
+        liveUrl: 'https://hemavathy-r.github.io/'
       }
     ];
 
@@ -810,15 +808,15 @@ END;`,
         color: 'purple',
         code: `{
   "engineer": "Hemavathy R",
-  "target_role": "Full Stack Developer (Data-Intensive Web Applications)",
-  "experience_years": 8,
+  "target_role": "Full Stack & Database Engineer",
+  "experience_years": "8+",
   "full_stack_capabilities": {
-    "frontend": ["HTML5", "CSS3", "Tailwind CSS", "JavaScript (ES6+)", "React", "Responsive Dashboards"],
-    "backend": ["Python", "Node.js", "RESTful APIs", "T-SQL", "Oracle PL/SQL", "Shell Automation"],
-    "databases": ["SQL Server", "PostgreSQL", "Oracle", "Query Optimization", "RPO/RTO & Clustering"],
-    "cloud_devops": ["AWS Developer Associate", "Git", "CI/CD Pipelines", "Agile/Scrum", "Unit & Integration Testing"]
+    "frontend": ["JavaScript", "HTML5", "CSS3", "Tailwind CSS", "RESTful APIs", "LocalStorage API", "Responsive UI Design"],
+    "backend_scripting": ["SQL", "PL/SQL", "T-SQL", "Python", "Shell Scripting", "VBA", "Power Query"],
+    "databases": ["PostgreSQL", "MS SQL Server", "Oracle DB", "ETL Pipelines", "Query Optimization", "Data Modeling", "Data Warehousing", "Indexing & Partitioning", "RPO/RTO & Disaster Recovery"],
+    "cloud_devops": ["AWS", "Git", "GitHub", "Informatica PowerCenter", "InRule DL", "Power BI", "Unit & Integration Testing", "TDD", "CI/CD", "Agile/Scrum"]
   },
-  "value_proposition": "Builds fast, reliable full-stack web apps backed by 8 years of production database engineering."
+  "value_proposition": "Designs high-availability database architectures (99.9% SLA), optimizes SQL/ETL pipelines (+40%), and builds end-to-end web applications."
 }`,
         previewTitle: 'System Architecture Verification',
         previewOutput: `✓ Full Stack Blueprint Validated
@@ -827,14 +825,15 @@ END;`,
     };
 
     const SEARCH_INDEX = [
-      { title: 'Resume_Hemavathy_R.pdf — Full Stack & Database Engineer CV', desc: 'Complete updated resume, SVCE B.Tech IT, Experience, Skills & Print PDF', app: 'resume', tag: 'PDF' },
-      { title: 'This PC — Full Stack Web Projects & Enterprise Experience', desc: 'Editable Full Stack projects + AssureCare HealthTech & Accenture roles', app: 'explorer', tag: 'WORKS' },
+      { title: 'Resume_Hemavathy_R.pdf — Full Stack & Database Engineer CV', desc: 'Updated resume with Summary, Skills, PokeHub, HemaOS, Experience & Education', app: 'resume', tag: 'PDF' },
+      { title: 'PokeHub — Full-Stack Pokedex & Trainer Squad Manager', desc: 'JavaScript, HTML5, Tailwind CSS, REST API & SQL relational squad backend', app: 'explorer', tag: 'PROJECT' },
+      { title: 'HemaOS — Windows 11 Interactive Developer Desktop', desc: 'Zero-dependency Windows 11 browser desktop, VS Code IDE & PowerShell CLI', app: 'explorer', tag: 'PROJECT' },
       { title: 'VS_Code.exe — Full Stack Code & SQL Workbench', desc: 'React App.tsx, Python FastAPI routes, and SQL Index Optimization', app: 'vscode', tag: 'IDE' },
-      { title: 'Skills_Monitor — Categorized Tech Stack & Credentials', desc: 'Languages & Web, Databases & Data Engineering, AWS & Agile TDD', app: 'skills', tag: 'SKILLS' },
+      { title: 'Skills_Monitor — Categorized Tech Stack & Credentials', desc: 'Full Stack & Web, Languages & Scripting, Databases, Cloud & Methodologies', app: 'skills', tag: 'SKILLS' },
       { title: 'AssureCare HealthTech LLP (Nov 2022 – May 2026)', desc: 'Senior Configuration Engineer • +40% query perf, -50% time, 99.9% SLA', app: 'explorer', tag: 'EXP' },
       { title: 'Accenture Solutions Pvt. Ltd (Oct 2018 – Nov 2022)', desc: 'Application Development Analyst & Associate • 25+ automated workflows (-60%)', app: 'explorer', tag: 'EXP' },
       { title: 'Education — SVCE, Anna University (B.Tech IT)', desc: 'Bachelor of Technology in Information Technology (2014–2018), Chennai', app: 'resume', tag: 'EDU' },
-      { title: 'Windows_Terminal (PowerShell / Node & SQL CLI)', desc: 'Run whoami, experience, skills, education, certifications, internships', app: 'terminal', tag: 'CLI' },
+      { title: 'Windows_Terminal (PowerShell / Node & SQL CLI)', desc: 'Run whoami, projects, experience, skills, education, certifications', app: 'terminal', tag: 'CLI' },
       { title: 'Outlook_Contact — Hire / Connect', desc: 'hema12ramesh@gmail.com | (+91) 99623 82345 | Mumbai, India', app: 'contact', tag: 'MAIL' }
     ];
 
@@ -914,7 +913,7 @@ END;`,
 
       if ('serviceWorker' in navigator && location.protocol === 'https:') {
         const swCode = `
-          const CACHE = 'hemaos-v1';
+          const CACHE = 'hemaos-v2';
           self.addEventListener('install', (e) => {
             e.waitUntil(caches.open(CACHE).then((c) => c.addAll(['./'])));
           });
@@ -1392,7 +1391,7 @@ END;`,
               <span class="text-slate-500">&gt;</span>
               <span class="text-slate-200">Hemavathy_R (D:)</span>
               <span class="text-slate-500">&gt;</span>
-              <span id="explorer-breadcrumb" class="text-emerald-400 font-mono">${state.explorerTab === 'fullstack' ? 'Full_Stack_Web_Projects' : 'Enterprise_Experience_8Yrs'}</span>
+              <span id="explorer-breadcrumb" class="text-emerald-400 font-mono">${state.explorerTab === 'fullstack' ? 'Full_Stack_Web_Projects' : 'Enterprise_Experience_7Yrs'}</span>
             </div>
             <div class="flex items-center gap-1.5">
               <button onclick="openProjectModal()" class="px-2.5 py-1.5 rounded bg-sky-500 hover:bg-sky-400 text-slate-950 font-bold transition shadow">+ Add / Edit Project</button>
@@ -1418,14 +1417,14 @@ END;`,
                 <div>
                   <div class="flex justify-between text-[10px] mb-1">
                     <span class="text-slate-300">Full Stack Web</span>
-                    <span class="text-sky-400 font-mono">React/API</span>
+                    <span class="text-sky-400 font-mono">JS / Tailwind</span>
                   </div>
                   <div class="h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="h-full bg-sky-400 w-[92%]"></div></div>
                 </div>
                 <div>
                   <div class="flex justify-between text-[10px] mb-1">
                     <span class="text-slate-300">DB &amp; Backend</span>
-                    <span class="text-emerald-400 font-mono">8 Yrs</span>
+                    <span class="text-emerald-400 font-mono">8+ Yrs</span>
                   </div>
                   <div class="h-1.5 bg-slate-800 rounded-full overflow-hidden"><div class="h-full bg-emerald-400 w-[98%]"></div></div>
                 </div>
@@ -1465,7 +1464,7 @@ END;`,
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
                   <label class="block text-[10px] text-slate-400 mb-1">Tech Stack (comma-separated) *</label>
-                  <input required id="proj-stack" type="text" placeholder="React, Node.js, PostgreSQL, Tailwind" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-white focus:border-sky-400 focus:outline-none" />
+                  <input required id="proj-stack" type="text" placeholder="JavaScript, HTML5, Tailwind CSS, SQL" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-white focus:border-sky-400 focus:outline-none" />
                 </div>
                 <div>
                   <label class="block text-[10px] text-slate-400 mb-1">Key Metric / Highlight</label>
@@ -1475,11 +1474,11 @@ END;`,
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-2.5">
                 <div>
                   <label class="block text-[10px] text-slate-400 mb-1">GitHub Repo URL</label>
-                  <input id="proj-github" type="text" placeholder="https://github.com/username/repo" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-sky-300 focus:border-sky-400 focus:outline-none" />
+                  <input id="proj-github" type="text" placeholder="https://github.com/hemavathy-r/repo" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-sky-300 focus:border-sky-400 focus:outline-none" />
                 </div>
                 <div>
                   <label class="block text-[10px] text-slate-400 mb-1">Live Demo URL</label>
-                  <input id="proj-live" type="text" placeholder="https://your-app.vercel.app" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-emerald-300 focus:border-sky-400 focus:outline-none" />
+                  <input id="proj-live" type="text" placeholder="https://hemavathy-r.github.io" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-emerald-300 focus:border-sky-400 focus:outline-none" />
                 </div>
               </div>
               <div class="flex items-center justify-between pt-2">
@@ -1499,7 +1498,7 @@ END;`,
       state.explorerTab = tab;
       const labels = {
         fullstack: 'Full_Stack_Web_Projects',
-        experience: 'Enterprise_Experience_8Yrs',
+        experience: 'Enterprise_Experience_7Yrs',
         install: 'Deploy_And_Install_App'
       };
       if ($('explorer-breadcrumb')) $('explorer-breadcrumb').textContent = labels[tab] || tab;
@@ -1522,7 +1521,7 @@ END;`,
             </div>
             <h1 class="text-lg sm:text-xl font-bold text-white">Hemavathy R</h1>
             <p class="text-slate-300 text-xs mt-1 leading-relaxed max-w-2xl">
-              Full Stack &amp; Database Engineer combining modern web application development (<strong>JavaScript, HTML5/CSS3, Python, REST APIs</strong>) with <strong>8 years of enterprise data engineering, SQL/PL-SQL optimization, and 99.9% SLA reliability</strong>.
+              Full Stack &amp; Database Engineer with <strong>8+ years of enterprise experience</strong> designing high-availability database architectures (<strong>99.9% SLA</strong>), optimizing complex SQL/ETL pipelines, and building end-to-end web applications.
             </p>
           </div>
           <div class="grid grid-cols-2 gap-2 shrink-0">
@@ -1572,9 +1571,9 @@ END;`,
 
             <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
               <div class="p-3.5 rounded-lg bg-white/5 border border-white/10 space-y-1.5">
-                <div class="text-[10px] font-mono text-sky-400 font-bold">STEP 1 — HOST FOR FREE (2 MIN)</div>
-                <div class="font-bold text-white">Publish on Vercel / GitHub Pages</div>
-                <p class="text-[11px] text-slate-300 leading-relaxed">Save this file as <code class="text-sky-300">index.html</code> in a GitHub repo and connect it to <strong>vercel.com</strong> or <strong>netlify.com</strong> (free HTTPS URL like <code class="text-emerald-300">hemavathy.vercel.app</code>).</p>
+                <div class="text-[10px] font-mono text-sky-400 font-bold">STEP 1 — HOSTED ON GITHUB PAGES</div>
+                <div class="font-bold text-white">Live at hemavathy-r.github.io</div>
+                <p class="text-[11px] text-slate-300 leading-relaxed">Push <code class="text-sky-300">index.html</code> to <code class="text-emerald-300">hemavathy-r.github.io</code> on GitHub to deploy automatically over HTTPS.</p>
               </div>
 
               <div class="p-3.5 rounded-lg bg-white/5 border border-white/10 space-y-1.5">
@@ -1588,12 +1587,6 @@ END;`,
                 <div class="font-bold text-white">Android &amp; iPhone App</div>
                 <p class="text-[11px] text-slate-300 leading-relaxed">On <strong>Android Chrome</strong> tap <em>Add to Home screen / Install app</em>. On <strong>iPhone Safari</strong> tap <em>Share → Add to Home Screen</em> to launch fullscreen like a native OS.</p>
               </div>
-            </div>
-
-            <div class="p-3 rounded-lg bg-slate-900 border border-white/10 font-mono text-[11px] text-slate-300 space-y-1">
-              <div class="text-sky-400 font-bold"># Optional: Package as a standalone Windows .exe / Android .apk using PWABuilder</div>
-              <div>1. Visit <span class="text-emerald-300">https://www.pwabuilder.com</span> and paste your deployed Vercel URL</div>
-              <div>2. Click <span class="text-amber-300">Package for Stores</span> → Download Windows MSIX / Android APK installer</div>
             </div>
           </div>
         `;
@@ -1647,9 +1640,9 @@ END;`,
           badgeColor: 'emerald',
           summary: 'Enterprise healthcare data engineering, query optimization, and high-availability database operations (99.9% SLA).',
           bullets: [
-            'Designed and optimized complex SQL objects (procedures, functions, triggers, views), boosting query performance by 40% and cutting processing times by 50%.',
+            'Designed and optimized complex SQL objects (procedures, functions, triggers, views) across MS SQL Server and PostgreSQL, boosting query performance by 40% and cutting processing times by 50%.',
             'Built automated executive KPI dashboards and governance reports, accelerating leadership decision turnaround time by 40%.',
-            'Led end-to-end SQL data validation for critical production pipelines and maintained 99.9% database stability (RPO/RTO) across servers supporting 50K+ records, resolving 95% of high-priority defects within 24 hours.',
+            'Led end-to-end SQL data validation for critical ETL production pipelines and maintained 99.9% database stability (RPO/RTO) across servers supporting 50K+ records, resolving 95% of high-priority defects within 24 hours.',
             'Streamlined configuration release cycles by 25% through standardized change control, index strategies, and peer code reviews.'
           ],
           tags: ['SQL Server', 'PostgreSQL', 'PL/SQL', 'T-SQL', 'ETL', 'Performance Tuning', 'RPO/RTO', 'KPI Dashboards']
@@ -1662,8 +1655,8 @@ END;`,
           badgeColor: 'sky',
           summary: 'Telecom billing data platforms, financial SLA adherence, and scalable backend SQL architecture.',
           bullets: [
-            'Engineered optimized SQL procedures, triggers, and high-availability disaster recovery workflows for large-scale telecom billing systems.',
-            'Translated 50+ complex business rules into scalable database architectures in collaboration with 8+ cross-functional Product Owners and QA engineers.',
+            'Engineered optimized Oracle SQL and PL/SQL procedures, triggers, and high-availability disaster recovery workflows for large-scale telecom billing systems.',
+            'Translated 50+ complex business rules into scalable database architectures in collaboration with 8+ cross-functional Product Owners and QA engineers in an Agile/Scrum environment.',
             'Conducted root-cause data analysis on high-impact payment discrepancies, ensuring 100% data completeness and financial SLA compliance.'
           ],
           tags: ['Oracle SQL', 'PL/SQL', 'High Availability', 'Disaster Recovery', 'Root-Cause Analysis', 'Agile/Scrum']
@@ -1720,9 +1713,9 @@ END;`,
       $('proj-category').value = existing ? existing.category : 'Full Stack Web Application';
       $('proj-tagline').value = existing ? existing.tagline : '';
       $('proj-desc').value = existing ? existing.description : '';
-      $('proj-stack').value = existing ? existing.stack.join(', ') : 'React, JavaScript, Node.js / Python, PostgreSQL';
+      $('proj-stack').value = existing ? existing.stack.join(', ') : 'JavaScript, HTML5, Tailwind CSS, REST API, SQL';
       $('proj-metrics').value = existing ? existing.metrics : '';
-      $('proj-github').value = existing ? existing.githubUrl : '';
+      $('proj-github').value = existing ? existing.githubUrl : 'https://github.com/hemavathy-r/';
       $('proj-live').value = existing ? existing.liveUrl : '';
     }
 
@@ -1756,12 +1749,14 @@ END;`,
       writeStorage(STORAGE_KEYS.projects, projects);
       closeProjectModal();
       switchExplorerTab('fullstack');
+      refreshWindowBody('resume');
       showToast(`Saved project "${entry.title}"`);
     }
 
     function deleteProject(id) {
       writeStorage(STORAGE_KEYS.projects, getProjects().filter(p => p.id !== id));
       switchExplorerTab('fullstack');
+      refreshWindowBody('resume');
       showToast('Project removed from portfolio');
     }
 
@@ -1769,6 +1764,7 @@ END;`,
       writeStorage(STORAGE_KEYS.projects, DEFAULT_PROJECTS);
       closeProjectModal();
       switchExplorerTab('fullstack');
+      refreshWindowBody('resume');
       showToast('Restored default Full Stack projects');
     }
 
@@ -1865,6 +1861,8 @@ END;`,
 
           <div class="flex-1 overflow-y-auto bg-slate-800/70 p-3 sm:p-6">
             <div id="printable-resume" class="max-w-3xl mx-auto bg-white text-slate-900 rounded-lg shadow-2xl p-6 sm:p-9 space-y-5 selectable-text">
+              
+              <!-- Resume Header -->
               <div class="border-b-2 border-slate-900 pb-4 flex flex-col sm:flex-row sm:items-end justify-between gap-2">
                 <div>
                   <h1 class="text-2xl font-extrabold tracking-tight text-slate-950">Hemavathy R</h1>
@@ -1884,23 +1882,66 @@ END;`,
                 </div>
               </div>
 
+              <!-- Professional Summary -->
+              <div>
+                <h2 class="text-xs font-bold uppercase tracking-wider text-blue-800 border-b border-slate-200 pb-1 mb-1.5">Professional Summary</h2>
+                <p class="text-[11.5px] text-slate-800 leading-relaxed">
+                  Full Stack &amp; Database Engineer with 8+ years of enterprise experience designing high-availability database architectures (99.9% SLA), optimizing complex SQL/ETL pipelines, and building end-to-end web applications. Proven track record of boosting query performance by up to 40%, automating data workflows to cut processing time by 60%, and delivering scalable full-stack solutions across healthcare and telecom domains.
+                </p>
+              </div>
+
+              <!-- Technical Skills -->
+              <div>
+                <h2 class="text-xs font-bold uppercase tracking-wider text-blue-800 border-b border-slate-200 pb-1 mb-2">Technical Skills</h2>
+                <div class="grid grid-cols-1 gap-1.5 text-xs text-slate-800">
+                  <div><strong>Full Stack &amp; Web:</strong> JavaScript, HTML5, CSS3, Tailwind CSS, RESTful APIs, LocalStorage API, Responsive UI Design</div>
+                  <div><strong>Languages &amp; Scripting:</strong> SQL, PL/SQL, T-SQL, Python, Shell Scripting, VBA, Power Query</div>
+                  <div><strong>Databases &amp; Data Engineering:</strong> PostgreSQL, MS SQL Server, Oracle DB, ETL Pipelines, Query Optimization, Data Modeling, Data Warehousing, Indexing &amp; Partitioning, RPO/RTO &amp; Disaster Recovery</div>
+                  <div><strong>Cloud, Tools &amp; Methodologies:</strong> AWS, Git, GitHub, Informatica PowerCenter, InRule DL, Power BI, Advanced Excel, Unit &amp; Integration Testing, TDD, CI/CD, Agile/Scrum</div>
+                </div>
+              </div>
+
+              <!-- Full Stack Projects -->
+              <div class="space-y-3">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-blue-800 border-b border-slate-200 pb-1">Full Stack Projects</h2>
+
+                <div>
+                  <div class="flex flex-wrap justify-between items-baseline gap-1">
+                    <h3 class="text-xs font-bold text-slate-950">PokeHub — Full-Stack Pokedex &amp; Trainer Squad Manager <span class="font-normal text-slate-600">| Full-Stack Web &amp; Database Engineering</span></h3>
+                    <a href="hemavathy-r.github.io/" target="_blank" rel="noopener" class="text-[11px] font-semibold text-blue-700 hover:underline">GitHub Link - PokeHub</a>
+                  </div>
+                  <ul class="list-disc pl-4 space-y-1 text-[11.5px] text-slate-800 leading-snug mt-1">
+                    <li>Built a full-stack web application integrating PokeAPI with a relational SQL backend for user authentication, custom squad persistence, and battle-stat analytics across <strong>1,000+ indexed species</strong>.</li>
+                    <li>Implemented multi-criteria indexing, type-effectiveness matrices, and normalized relational schema storage for trainer rosters using <strong>JavaScript, HTML5, Tailwind CSS, REST API, and SQL</strong>.</li>
+                  </ul>
+                </div>
+
+                <div>
+                  <div class="flex flex-wrap justify-between items-baseline gap-1">
+                    <h3 class="text-xs font-bold text-slate-950">HemaOS — Windows 11 Interactive Developer Desktop <span class="font-normal text-slate-600">| Frontend UI &amp; Systems Engineering</span></h3>
+                    <a href="https://hemavathy-r.github.io/" target="_blank" rel="noopener" class="text-[11px] font-semibold text-blue-700 hover:underline">GitHub link - HemaOS</a>
+                  </div>
+                  <ul class="list-disc pl-4 space-y-1 text-[11.5px] text-slate-800 leading-snug mt-1">
+                    <li>Engineered a zero-dependency, 100% responsive Windows 11 browser-based desktop environment featuring multi-window z-index management, drag-and-drop framing, VS Code IDE previewer, and PowerShell CLI simulator.</li>
+                    <li>Developed local storage project CRUD operations and interactive system workflows using <strong>JavaScript, HTML5, Tailwind CSS, and LocalStorage API</strong>.</li>
+                  </ul>
+                </div>
+              </div>
+
+              <!-- Experience -->
               <div class="space-y-4">
                 <h2 class="text-xs font-bold uppercase tracking-wider text-blue-800 border-b border-slate-200 pb-1">Experience</h2>
 
                 <div>
                   <div class="flex flex-wrap justify-between items-baseline">
-                    <h3 class="text-xs font-bold text-slate-950">AssureCare HealthTech LLP</h3>
-                    <span class="text-[11px] font-semibold text-slate-600">Nov 2022 – May 2026</span>
+                    <h3 class="text-xs font-bold text-slate-950">Senior Configuration Engineer — <span class="text-blue-700">AssureCare HealthTech LLP</span></h3>
+                    <span class="text-[11px] font-semibold text-slate-600">Nov 2022 – May 2026 | Bangalore, India</span>
                   </div>
-                  <div class="flex flex-wrap justify-between items-baseline mb-1">
-                    <span class="text-[11.5px] font-semibold text-blue-700">Senior Configuration Engineer</span>
-                    <span class="text-[11px] text-slate-600">Bangalore, India</span>
-                  </div>
-                  <p class="text-[11px] italic text-slate-700 mb-1.5">Enterprise healthcare data engineering, query optimization, and high-availability database operations (99.9% SLA).</p>
+                  <p class="text-[11px] italic text-slate-700 my-1">Enterprise healthcare data engineering, query optimization, and high-availability database operations (99.9% SLA).</p>
                   <ul class="list-disc pl-4 space-y-1 text-[11.5px] text-slate-800 leading-snug">
-                    <li>Designed and optimized complex SQL objects (procedures, functions, triggers, views), boosting query performance by <strong>40%</strong> and cutting processing times by <strong>50%</strong>.</li>
+                    <li>Designed and optimized complex SQL objects (procedures, functions, triggers, views) across MS SQL Server and PostgreSQL, boosting query performance by <strong>40%</strong> and cutting processing times by <strong>50%</strong>.</li>
                     <li>Built automated executive KPI dashboards and governance reports, accelerating leadership decision turnaround time by <strong>40%</strong>.</li>
-                    <li>Led end-to-end SQL data validation for critical production pipelines and maintained <strong>99.9%</strong> database stability (RPO/RTO) across servers supporting 50K+ records, resolving <strong>95%</strong> of high-priority defects within 24 hours.</li>
+                    <li>Led end-to-end SQL data validation for critical ETL production pipelines and maintained <strong>99.9%</strong> database stability (RPO/RTO) across servers supporting 50K+ records, resolving <strong>95%</strong> of high-priority defects within 24 hours.</li>
                     <li>Streamlined configuration release cycles by <strong>25%</strong> through standardized change control, index strategies, and peer code reviews.</li>
                   </ul>
                   <div class="flex flex-wrap gap-1 mt-2">
@@ -1910,17 +1951,13 @@ END;`,
 
                 <div>
                   <div class="flex flex-wrap justify-between items-baseline">
-                    <h3 class="text-xs font-bold text-slate-950">Accenture Solutions Pvt. Ltd</h3>
-                    <span class="text-[11px] font-semibold text-slate-600">Dec 2020 – Nov 2022</span>
+                    <h3 class="text-xs font-bold text-slate-950">Application Development Analyst — <span class="text-blue-700">Accenture Solutions Pvt. Ltd</span></h3>
+                    <span class="text-[11px] font-semibold text-slate-600">Dec 2020 – Nov 2022 | Bangalore, India</span>
                   </div>
-                  <div class="flex flex-wrap justify-between items-baseline mb-1">
-                    <span class="text-[11.5px] font-semibold text-blue-700">Application Development Analyst</span>
-                    <span class="text-[11px] text-slate-600">Bangalore, India</span>
-                  </div>
-                  <p class="text-[11px] italic text-slate-700 mb-1.5">Telecom billing data platforms, financial SLA adherence, and scalable backend SQL architecture.</p>
+                  <p class="text-[11px] italic text-slate-700 my-1">Telecom billing data platforms, financial SLA adherence, and scalable backend SQL architecture.</p>
                   <ul class="list-disc pl-4 space-y-1 text-[11.5px] text-slate-800 leading-snug">
-                    <li>Engineered optimized SQL procedures, triggers, and high-availability disaster recovery workflows for large-scale telecom billing systems.</li>
-                    <li>Translated <strong>50+ complex business rules</strong> into scalable database architectures in collaboration with <strong>8+ cross-functional Product Owners and QA engineers</strong>.</li>
+                    <li>Engineered optimized Oracle SQL and PL/SQL procedures, triggers, and high-availability disaster recovery workflows for large-scale telecom billing systems.</li>
+                    <li>Translated <strong>50+ complex business rules</strong> into scalable database architectures in collaboration with <strong>8+ cross-functional Product Owners and QA engineers</strong> in an Agile/Scrum environment.</li>
                     <li>Conducted root-cause data analysis on high-impact payment discrepancies, ensuring <strong>100% data completeness</strong> and financial SLA compliance.</li>
                   </ul>
                   <div class="flex flex-wrap gap-1 mt-2">
@@ -1930,14 +1967,10 @@ END;`,
 
                 <div>
                   <div class="flex flex-wrap justify-between items-baseline">
-                    <h3 class="text-xs font-bold text-slate-950">Accenture Solutions Pvt. Ltd</h3>
-                    <span class="text-[11px] font-semibold text-slate-600">Oct 2018 – Dec 2020</span>
+                    <h3 class="text-xs font-bold text-slate-950">Application Developer Associate — <span class="text-blue-700">Accenture Solutions Pvt. Ltd</span></h3>
+                    <span class="text-[11px] font-semibold text-slate-600">Oct 2018 – Dec 2020 | Bangalore, India</span>
                   </div>
-                  <div class="flex flex-wrap justify-between items-baseline mb-1">
-                    <span class="text-[11.5px] font-semibold text-blue-700">Application Developer Associate</span>
-                    <span class="text-[11px] text-slate-600">Bangalore, India</span>
-                  </div>
-                  <p class="text-[11px] italic text-slate-700 mb-1.5">Workflow automation, production deployments, and client data operations.</p>
+                  <p class="text-[11px] italic text-slate-700 my-1">Workflow automation, production deployments, and client data operations.</p>
                   <ul class="list-disc pl-4 space-y-1 text-[11.5px] text-slate-800 leading-snug">
                     <li>Automated <strong>25+ core billing SQL workflows</strong>, reducing processing time by <strong>60%</strong> and eliminating manual financial reporting errors.</li>
                     <li>Resolved <strong>50+ monthly client requests</strong> at a <strong>95% SLA rate</strong> and coordinated <strong>15+ annual product deployments</strong> with zero critical escalations, lifting client satisfaction by <strong>20%</strong>.</li>
@@ -1948,49 +1981,20 @@ END;`,
                 </div>
               </div>
 
-              <div>
-                <h2 class="text-xs font-bold uppercase tracking-wider text-blue-800 border-b border-slate-200 pb-1 mb-2">Skills</h2>
-                <div class="grid grid-cols-1 gap-1.5 text-xs text-slate-800">
-                  <div><strong>Languages &amp; Web:</strong> SQL, PL/SQL, T-SQL, Python, JavaScript, HTML5, CSS3, Shell Scripting, VBA, Power Query</div>
-                  <div><strong>Databases &amp; Data Engineering:</strong> Oracle DB, PostgreSQL, MS SQL Server, ETL Pipelines, Query Optimization, Data Modeling, Data Warehousing, Indexing &amp; Partitioning, RPO/RTO &amp; Disaster Recovery</div>
-                  <div><strong>Tools, Cloud &amp; Methodologies:</strong> AWS, Git, GitHub, Informatica PowerCenter, InRule DL, Power BI, Advanced Excel, Unit &amp; Integration Testing, TDD, CI/CD, Agile/Scrum</div>
-                </div>
-              </div>
-
-              <div>
-                <h2 class="text-xs font-bold uppercase tracking-wider text-blue-800 border-b border-slate-200 pb-1 mb-1.5">Education</h2>
+              <!-- Education, Certifications & Internships -->
+              <div class="space-y-2 pt-1 border-t border-slate-200">
+                <h2 class="text-xs font-bold uppercase tracking-wider text-blue-800 border-b border-slate-200 pb-1">Education, Certifications &amp; Internships</h2>
                 <div class="flex flex-wrap justify-between items-baseline">
-                  <div class="font-bold text-slate-950">Sri Venkateswara College of Engineering (SVCE), Anna University</div>
-                  <span class="text-[11px] font-semibold text-slate-600">Jun 2014 – May 2018</span>
+                  <div class="font-bold text-slate-950">Bachelor of Technology (B.Tech) in Information Technology — <span class="text-blue-700">Sri Venkateswara College of Engineering (SVCE), Anna University</span></div>
+                  <span class="text-[11px] font-semibold text-slate-600">Jun 2014 – May 2018 | Chennai, India</span>
                 </div>
-                <div class="flex flex-wrap justify-between items-baseline text-[11px] text-slate-700 mb-1">
-                  <span class="font-semibold text-blue-700">Bachelor of Technology (B.Tech) in Information Technology</span>
-                  <span>Chennai, India</span>
-                </div>
-                <div class="text-[11px] text-slate-700">
-                  <strong>Relevant Focus Areas:</strong> Database Management Systems (DBMS) • Data Warehousing &amp; Mining • Web Technologies (HTML, CSS, JavaScript) • Software Engineering &amp; SDLC • Operating Systems &amp; Shell Scripting
+                <div class="text-[11.5px] text-slate-800 space-y-1">
+                  <div><strong>Relevant Coursework:</strong> Database Management Systems (DBMS), Data Warehousing &amp; Mining, Web Technologies (HTML, CSS, JavaScript), Software Engineering &amp; SDLC, Operating Systems &amp; Shell Scripting</div>
+                  <div><strong>Certifications:</strong> AWS Certified Developer – Associate | Agile Test-Driven Development | PL/SQL Expertise Badge</div>
+                  <div><strong>Internships:</strong> Data Cleaning &amp; Configuration Intern, Aatman Innovation Pvt. Ltd (2017) | Database Management Intern, HCL Infosystems Ltd (2016)</div>
                 </div>
               </div>
 
-              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-1 border-t border-slate-200">
-                <div>
-                  <h2 class="text-xs font-bold uppercase tracking-wider text-blue-800 mb-1.5">Certifications</h2>
-                  <ul class="list-disc pl-4 space-y-0.5 text-[11.5px] text-slate-800">
-                    <li>AWS Certified Developer – Associate — Amazon Web Services</li>
-                    <li>Agile Test-Driven Development</li>
-                    <li>PL/SQL Expertise Badge — Accenture</li>
-                    <li>Informatica PowerCenter ETL — Udemy</li>
-                    <li>Microsoft Excel Advanced Training</li>
-                  </ul>
-                </div>
-                <div>
-                  <h2 class="text-xs font-bold uppercase tracking-wider text-blue-800 mb-1.5">Internships</h2>
-                  <ul class="list-disc pl-4 space-y-1 text-[11.5px] text-slate-800">
-                    <li><strong>Data Cleaning &amp; Configuration Intern</strong> — Aatman Innovation Pvt. Ltd (2017)</li>
-                    <li><strong>Database Management Intern</strong> — HCL Infosystems Ltd (2016)</li>
-                  </ul>
-                </div>
-              </div>
             </div>
           </div>
 
@@ -2002,7 +2006,7 @@ END;`,
               </div>
               <div>
                 <label class="block text-[10px] text-slate-400 mb-1">GitHub URL</label>
-                <input id="link-github" type="url" placeholder="https://github.com/yourusername" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-sky-300 focus:border-sky-400 focus:outline-none" />
+                <input id="link-github" type="url" placeholder="https://github.com/hemavathy-r" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-sky-300 focus:border-sky-400 focus:outline-none" />
               </div>
               <div>
                 <label class="block text-[10px] text-slate-400 mb-1">LinkedIn URL</label>
@@ -2010,7 +2014,7 @@ END;`,
               </div>
               <div>
                 <label class="block text-[10px] text-slate-400 mb-1">Portfolio URL</label>
-                <input id="link-portfolio" type="url" placeholder="https://yourportfolio.vercel.app" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-emerald-300 focus:border-sky-400 focus:outline-none" />
+                <input id="link-portfolio" type="url" placeholder="https://hemavathy-r.github.io/" class="w-full bg-slate-950 border border-white/15 rounded-lg px-3 py-1.5 text-emerald-300 focus:border-sky-400 focus:outline-none" />
               </div>
               <div class="flex justify-end gap-2 pt-2">
                 <button type="button" onclick="closeLinksModal()" class="px-3 py-1.5 rounded-lg bg-white/10 text-slate-200">Cancel</button>
@@ -2025,17 +2029,22 @@ END;`,
     function renderSkillsApp() {
       const skillCategories = [
         {
-          category: 'Languages & Web',
+          category: 'Full Stack & Web',
           color: 'sky',
-          pills: ['SQL', 'PL/SQL', 'T-SQL', 'Python', 'JavaScript', 'HTML5', 'CSS3', 'Shell Scripting', 'VBA', 'Power Query']
+          pills: ['JavaScript', 'HTML5', 'CSS3', 'Tailwind CSS', 'RESTful APIs', 'LocalStorage API', 'Responsive UI Design']
+        },
+        {
+          category: 'Languages & Scripting',
+          color: 'purple',
+          pills: ['SQL', 'PL/SQL', 'T-SQL', 'Python', 'Shell Scripting', 'VBA', 'Power Query']
         },
         {
           category: 'Databases & Data Engineering',
           color: 'emerald',
-          pills: ['Oracle DB', 'PostgreSQL', 'MS SQL Server', 'ETL Pipelines', 'Query Optimization', 'Data Modeling', 'Data Warehousing', 'Indexing & Partitioning', 'RPO/RTO & Disaster Recovery']
+          pills: ['PostgreSQL', 'MS SQL Server', 'Oracle DB', 'ETL Pipelines', 'Query Optimization', 'Data Modeling', 'Data Warehousing', 'Indexing & Partitioning', 'RPO/RTO & Disaster Recovery']
         },
         {
-          category: 'Tools, Cloud & Methodologies',
+          category: 'Cloud, Tools & Methodologies',
           color: 'amber',
           pills: ['AWS', 'Git', 'GitHub', 'Informatica PowerCenter', 'InRule DL', 'Power BI', 'Advanced Excel', 'Unit & Integration Testing', 'TDD', 'CI/CD', 'Agile/Scrum']
         }
@@ -2047,7 +2056,7 @@ END;`,
             <div class="p-3 rounded-xl bg-slate-950/75 border border-sky-400/25">
               <div class="text-[10px] font-mono text-slate-400">ROLE PROFILE</div>
               <div class="text-sm font-extrabold text-sky-400 mt-0.5">Full Stack &amp; DB</div>
-              <div class="text-[10px] text-slate-300">Mumbai, India</div>
+              <div class="text-[10px] text-slate-300">8+ Yrs • Mumbai</div>
             </div>
             <div class="p-3 rounded-xl bg-slate-950/75 border border-emerald-400/25">
               <div class="text-[10px] font-mono text-slate-400">QUERY &amp; KPI GAIN</div>
@@ -2066,7 +2075,7 @@ END;`,
             </div>
           </div>
 
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-3.5">
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-3.5">
             ${skillCategories.map(grp => `
               <div class="p-4 rounded-xl bg-slate-950/65 border border-white/10 space-y-3">
                 <h3 class="font-bold text-${grp.color}-400 text-xs border-b border-white/10 pb-2">${grp.category}</h3>
@@ -2099,9 +2108,7 @@ END;`,
               <div class="flex flex-wrap gap-1.5 pt-1 border-t border-white/10">
                 <span class="px-2 py-0.5 rounded bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[10px]">AWS Certified Developer – Associate</span>
                 <span class="px-2 py-0.5 rounded bg-rose-500/15 border border-rose-500/30 text-rose-300 text-[10px]">Agile Test-Driven Development</span>
-                <span class="px-2 py-0.5 rounded bg-sky-500/15 border border-sky-500/30 text-sky-300 text-[10px]">PL/SQL Expertise Badge (Accenture)</span>
-                <span class="px-2 py-0.5 rounded bg-emerald-500/15 border border-emerald-500/30 text-emerald-300 text-[10px]">Informatica PowerCenter ETL</span>
-                <span class="px-2 py-0.5 rounded bg-purple-500/15 border border-purple-500/30 text-purple-300 text-[10px]">MS Excel Advanced Training</span>
+                <span class="px-2 py-0.5 rounded bg-sky-500/15 border border-sky-500/30 text-sky-300 text-[10px]">PL/SQL Expertise Badge</span>
               </div>
             </div>
           </div>
@@ -2118,15 +2125,15 @@ END;`,
             <div class="text-emerald-400">Type <span class="text-amber-300 font-bold">help</span> or click a quick command below:</div>
             <div class="flex flex-wrap gap-1.5 pt-1">
               <button onclick="runTerminalCmd('whoami')" class="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[11px] text-sky-300">whoami</button>
+              <button onclick="runTerminalCmd('projects')" class="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[11px] text-purple-300">projects</button>
               <button onclick="runTerminalCmd('experience')" class="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[11px] text-emerald-300">experience</button>
               <button onclick="runTerminalCmd('skills')" class="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[11px] text-amber-300">skills</button>
-              <button onclick="runTerminalCmd('education')" class="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[11px] text-purple-300">education</button>
-              <button onclick="runTerminalCmd('certifications')" class="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[11px] text-rose-300">certifications</button>
+              <button onclick="runTerminalCmd('education')" class="px-2 py-0.5 rounded bg-white/10 hover:bg-white/20 text-[11px] text-rose-300">education</button>
             </div>
           </div>
           <form onsubmit="handleTerminalSubmit(event)" class="flex items-center gap-2 pt-2 border-t border-white/15 shrink-0">
             <span class="text-emerald-400 font-bold">PS C:\\Users\\Hemavathy&gt;</span>
-            <input id="win-term-input" type="text" autocomplete="off" placeholder="Enter command (whoami, experience, skills, education, internships)..." class="flex-1 bg-transparent text-white focus:outline-none" />
+            <input id="win-term-input" type="text" autocomplete="off" placeholder="Enter command (whoami, projects, experience, skills, education, certifications)..." class="flex-1 bg-transparent text-white focus:outline-none" />
           </form>
         </div>
       `;
@@ -2155,44 +2162,44 @@ END;`,
       const commands = {
         help: `Available Commands:
   whoami         - Full Stack & Database Engineer summary & contact info
+  projects       - PokeHub & HemaOS full stack project architecture
   experience     - AssureCare HealthTech LLP & Accenture Solutions roles
-  skills         - Categorized Languages & Web, Databases, Tools & Cloud
+  skills         - Categorized Full Stack, Scripting, Databases & Cloud stack
   education      - B.Tech IT from SVCE, Anna University (2014–2018)
-  certifications - AWS Developer Associate, Agile TDD, PL/SQL & ETL credentials
+  certifications - AWS Developer Associate, Agile TDD & PL/SQL credentials
   internships    - Aatman Innovation (2017) & HCL Infosystems (2016)
-  projects       - List Full Stack web applications in portfolio
   contact        - Print Email, Phone & Social Links
   cls / clear    - Clear terminal screen`,
         whoami: `Hemavathy R | Full Stack & Database Engineer
 Location : Mumbai, India
 Email    : hema12ramesh@gmail.com
 Phone    : (+91) 99623 82345
-Summary  : Full Stack & Database Engineer with 8 years in enterprise healthcare & telecom data platforms, SQL/PL-SQL tuning (+40%), workflow automation (-60%), and 99.9% SLA reliability.`,
-        skills: `[Languages & Web]
-  SQL, PL/SQL, T-SQL, Python, JavaScript, HTML5, CSS3, Shell Scripting, VBA, Power Query
+Summary  : Full Stack & Database Engineer with 8+ years of enterprise experience designing high-availability database architectures (99.9% SLA), optimizing SQL/ETL pipelines (+40%), automating workflows (-60%), and building end-to-end web applications.`,
+        skills: `[Full Stack & Web]
+  JavaScript, HTML5, CSS3, Tailwind CSS, RESTful APIs, LocalStorage API, Responsive UI Design
+[Languages & Scripting]
+  SQL, PL/SQL, T-SQL, Python, Shell Scripting, VBA, Power Query
 [Databases & Data Engineering]
-  Oracle DB, PostgreSQL, MS SQL Server, ETL Pipelines, Query Optimization, Data Modeling, Data Warehousing, Indexing & Partitioning, RPO/RTO & Disaster Recovery
-[Tools, Cloud & Methodologies]
+  PostgreSQL, MS SQL Server, Oracle DB, ETL Pipelines, Query Optimization, Data Modeling, Data Warehousing, Indexing & Partitioning, RPO/RTO & Disaster Recovery
+[Cloud, Tools & Methodologies]
   AWS, Git, GitHub, Informatica PowerCenter, InRule DL, Power BI, Advanced Excel, Unit & Integration Testing, TDD, CI/CD, Agile/Scrum`,
         education: `Sri Venkateswara College of Engineering (SVCE), Anna University — Chennai, India
 Degree : Bachelor of Technology (B.Tech) in Information Technology (Jun 2014 – May 2018)
-Focus  : DBMS, Data Warehousing & Mining, Web Technologies (HTML, CSS, JS), Software Engineering & SDLC, OS & Shell Scripting`,
+Focus  : DBMS, Data Warehousing & Mining, Web Technologies (HTML, CSS, JavaScript), Software Engineering & SDLC, Operating Systems & Shell Scripting`,
         internships: `* Data Cleaning & Configuration Intern — Aatman Innovation Pvt. Ltd (2017)
 - Database Management Intern — HCL Infosystems Ltd (2016)`,
         projects: getProjects()
-          .map((p, i) => `[${i + 1}] ${p.title} (${p.category})\n    Stack: ${p.stack.join(', ')}\n    Impact: ${p.metrics || p.tagline}`)
+          .map((p, i) => `[${i + 1}] ${p.title} (${p.category})\n    Stack: ${p.stack.join(', ')}\n    Repo : ${p.githubUrl}`)
           .join('\n'),
-        experience: `[1] AssureCare HealthTech LLP | Senior Configuration Engineer (Nov 2022 – May 2026 | Bangalore)
-    -> Boosted query perf +40%, cut processing -50%, KPI dashboards (+40% decision speed), 99.9% SLA on 50K+ records
-[2] Accenture Solutions Pvt. Ltd | Application Development Analyst (Dec 2020 – Nov 2022 | Bangalore)
-    -> Telecom billing SQL procedures, HA/DR workflows, 50+ business rules across 8+ teams, 100% data completeness
-[3] Accenture Solutions Pvt. Ltd | Application Developer Associate (Oct 2018 – Dec 2020 | Bangalore)
+        experience: `[1] Senior Configuration Engineer — AssureCare HealthTech LLP (Nov 2022 – May 2026 | Bangalore)
+    -> MS SQL Server & PostgreSQL tuning (+40% perf, -50% time), KPI dashboards (+40%), 99.9% SLA on 50K+ records
+[2] Application Development Analyst — Accenture Solutions Pvt. Ltd (Dec 2020 – Nov 2022 | Bangalore)
+    -> Oracle SQL & PL/SQL procedures, HA/DR workflows, 50+ business rules across 8+ teams, 100% data completeness
+[3] Application Developer Associate — Accenture Solutions Pvt. Ltd (Oct 2018 – Dec 2020 | Bangalore)
     -> Automated 25+ billing SQL workflows (-60% time), 95% SLA on 50+ monthly requests, 15+ annual deployments`,
-        certifications: `* AWS Certified Developer – Associate — Amazon Web Services
+        certifications: `* AWS Certified Developer – Associate
 - Agile Test-Driven Development
-- PL/SQL Expertise Badge
-- Informatica PowerCenter ETL
-- Microsoft Excel Advanced Training`,
+- PL/SQL Expertise Badge`,
         contact: `Email     : hema12ramesh@gmail.com
 Phone     : (+91) 99623 82345
 Location  : Mumbai, India
